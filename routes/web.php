@@ -22,7 +22,9 @@ use App\Http\Controllers\DashboardController;
 Auth::routes(['verify' => true]);
 
 /***************************************** VERIFICATION ROUTES *************************************/
-
+Route::get('/', function () {
+    return view('home');
+});
 //Gives link to verification notice
 Route::get('/email/verify', function () {
     return view('auth.verify');
@@ -34,7 +36,11 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-
+Route::resource('users','UsersController');
+Route::resource('posts','PostsController');
+Route::resource('categories','CategoriesController');
+Route::resource('comments','CommentsController');
+Route::resource('likes','LikesController');
 //Verification link resend
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();

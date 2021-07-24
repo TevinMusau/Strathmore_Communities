@@ -10,6 +10,7 @@
         <title>Strathmore Communities</title>
 
         <!-- Scripts -->
+        <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
         <!-- Fonts -->
@@ -145,7 +146,7 @@
             <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm sticky-top">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{{ url('/') }}" id="title"> 
-                        <img src="{{ asset('/images/logo_white.png') }}" id="Logo1" class="img-fluid" />
+                        {{-- <img src="{{ asset('/images/logo_white.png') }}" id="Logo1" class="img-fluid" /> --}}
                         Strathmore Communities
                     </a>
 
@@ -163,7 +164,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" id="link" href="#">About</a>
+                                <a class="nav-link" id="link" href="/categories">Communities</a>
                             </li>
 
                             <li class="nav-item">
@@ -191,7 +192,7 @@
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <!-- To Dashboard Link, by getting the current user -->
-                                        <a class="dropdown-item" href="{{ route('dashboard', auth()->user()->username)}}"> 
+                                        <a class="dropdown-item" href="/users/{{Auth::user()->id}}"> 
                                             Dashboard
                                         </a>
 
