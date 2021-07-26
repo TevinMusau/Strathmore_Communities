@@ -3,11 +3,14 @@
 @section('content')
 <head>
     <style>
+        main{
+            background-image: url('/images/verify_pattern.png');
+        }
         #Title{
-            margin-top: 100px;
-            margin-bottom: 30px; 
+            padding-top: 7%;
             font-weight:bold; 
-            font-family: cursive;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: #2F4F4F;
         }
         #cardHead{
             text-align: center; 
@@ -25,7 +28,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="margin-bottom: 60px;">
+            <div class="card m-5" >
                 <div class="card-header" id="cardHead">
                         {{ __('Verify Your Email Address') }}
                 </div>

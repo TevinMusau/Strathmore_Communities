@@ -5,7 +5,7 @@
 <head>
     <style>
         #Title{
-            margin-top: 100px;
+            padding-top: 1%;
             margin-bottom: 30px; 
             font-weight:bold; 
             font-family: cursive;
@@ -31,6 +31,9 @@
                 <div class="card-header" id="cardHead">
                     Login
                 </div>
+                
+                @include('inc.messages')
+                {{-- <div style="background-image: url('/images/shattered.png');">@include('inc.messages')</div> --}}
                 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -74,7 +77,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-2 text-center">
-                                <button type="submit" class="btn btn-primary" style="width: 200px;">
+                                <button type="submit" class="btn btn-outline-success" style="width: 200px;">
                                     {{ __('Login') }}
                                 </button>
 
@@ -94,5 +97,4 @@
         </div>
     </div>
 </div>
-
 @endsection

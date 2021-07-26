@@ -5,15 +5,15 @@
 <head>
     <style>
         #titleBox1{
-            border: 1px solid brown;
+            /* border: 1px solid brown; */
             margin: 1rem;
         }
         #relatedLink1Box{
-            border: 1px solid blue;
+            /* border: 1px solid blue; */
             margin: 1rem;
         }
         #relatedImageBox1{
-            border: 1px solid yellow;
+            /* border: 1px solid yellow; */
             display: block; 
             text-align: center; 
             max-width: 55%; 
@@ -26,20 +26,21 @@
         #relatedText1{
             display: block; 
             text-align: center;
-            border: 1px solid red; 
-            margin: 1em;
+            /* border: 1px solid red;  */
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
         #titleBox2{
-            border: 1px solid brown;
+            /* border: 1px solid brown; */
             margin: 1rem;
         }
         #relatedLink2Box{
-            border: 1px solid blue;
+            /* border: 1px solid blue; */
             margin: 1rem;
         }
         #relatedImageBox2{
-            border: 1px solid yellow; 
+            /* border: 1px solid yellow;  */
             display: block; 
             text-align: center; 
             margin: 1em;
@@ -51,21 +52,22 @@
         #relatedText2{
             display: block; 
             text-align: center;
-            border: 1px solid red; 
+            /* border: 1px solid red;  */
             max-width: 55%; 
-            margin: 1em;
+            margin-top: auto;
+            margin-bottom: auto;
         }
         
         #titleBox3{
-            border: 1px solid brown;
+            /* border: 1px solid brown; */
             margin: 1rem;
         }
         #relatedLinkBox3{
-            border: 1px solid blue; 
+            /* border: 1px solid blue;  */
             margin: 1rem;
         }
         #relatedImageBox3{
-            border: 1px solid yellow; 
+            /* border: 1px solid yellow;  */
             display: block; 
             text-align: center; 
             margin: 1em;
@@ -77,27 +79,33 @@
         #relatedText3{
             display: block; 
             text-align: center;
-            border: 1px solid red; 
-            margin: 1em;
+            /* border: 1px solid red;  */
+            margin-top: auto;
+            margin-bottom: auto;
         }
     </style>
 </head>
 
 <div class="container-fluid">
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center m-5">
         <h3> Related Links </h3>
     </div>
+    <hr class="light">
 
-    <div class="justify-content-start" id="titleBox1">
+    <div class="justify-content-start p-3" id="titleBox1">
         <div>
-            <p>1. Strathmore Univeristy Website</p>
+            <h3>
+                <a href="https://strathmore.edu" title="Strathmore University Website" target="_blank">1. Strathmore Univeristy Website</a>
+            </h3>
         </div>
     </div>
 
     <div class="row justify-content-start" id="relatedLink1Box">
         <div class="col order-1" id="relatedImageBox1">
-            <img class="img-fluid" id="relatedImage1" src="/images/su_main.png">
+            <a href="https://strathmore.edu" title="Strathmore University Website" target="_blank">
+                <img class="img-fluid" id="relatedImage1" style="border: 3px solid black" src="/images/su_main.png">
+            </a>
         </div>
 
         <div class="col order-2" id="relatedText1">
@@ -107,17 +115,19 @@
         </div>
     </div>
 
-    <div class="row justify-content-end" id="titleBox2">
+    <div class="row justify-content-end mt-5 p-3" id="titleBox2">
         <div>
-            <p>
-              2. Strathmore Univeristy E-learning
-            </p>
+            <h3>
+              <a href="https://elearning.strathmore.edu" title="Strathmore University Website" target="_blank">2. Strathmore Univeristy E-learning</a>
+            </h3>
         </div>
     </div>
 
     <div class="row justify-content-start" id="relatedLink2Box">
         <div class="col order-2" id="relatedImageBox2">
-            <img class="img-fluid"src="/images/su_elearning.png" id="relatedImage2">
+            <a href="https://elearning.strathmore.edu" title="Strathmore University E-Learning" target="_blank">
+                <img class="img-fluid" style="border: 3px solid black" src="/images/su_elearning.png" id="relatedImage2">
+            </a>
         </div>
         <div class="col order-1" id="relatedText2">
             <p> 
@@ -126,17 +136,19 @@
         </div>
     </div>
 
-    <div class="row justify-content-start" id="titleBox3">
+    <div class="row justify-content-start mt-5 p-3" id="titleBox3">
         <div>
-            <p>
-              3. Strathmore Univeristy AMS
-            </p>
+            <h3>
+              <a href="https://su-sso.strathmore.edu/susams" title="Strathmore University Website" target="_blank">3. Strathmore Univeristy AMS</a>
+            </h3>
         </div>
     </div>
 
     <div class="row justify-content-start" id="relatedLinkBox3">
         <div class="col order-1" id="relatedImageBox3">
-            <img class="img-fluid" src="/images/su_ams.png" id="relatedImage3">
+            <a href="https://su-sso.strathmore.edu/susams" title="Strathmore University AMS" target="_blank">
+                <img class="img-fluid" style="border: 3px solid black" src="/images/su_ams.png" id="relatedImage3">
+            </a>
         </div>
         <div class="col order-2" id="relatedText3">
             <p> 
