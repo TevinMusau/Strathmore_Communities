@@ -5,7 +5,7 @@
 <head>
     <style>
         #Title{
-            margin-top: 100px;
+            padding-top: 100px;
             margin-bottom: 30px;
             font-weight:bold;
             font-family: cursive;
@@ -27,11 +27,14 @@
 
     <div class="row justify-content-center">
         <div class="col-md-7">
-            <div class="card" style="margin-bottom: 100px;">
+            <div class="card" style="padding-bottom: 100px;">
                 <div class="card-header" id="cardHead">
                     {{ __('Register') }}
                 </div>
 
+                @include('inc.messages')
+                {{-- <div style="background-image: url('/images/shattered.png');">@include('inc.messages')</div> --}}
+                    
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -94,7 +97,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" style="width: 200px;">
+                                <button type="submit" class="btn btn-outline-success" style="width: 200px;">
                                     {{ __('Register') }}
                                 </button>
                             </div>

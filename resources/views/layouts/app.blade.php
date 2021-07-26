@@ -25,8 +25,11 @@
 
         <!-- Additional Styles -->
         <style>
+            /* main{
+            background-image: url('/images/shattered.png');
+        } */
             #title{
-                font-family: cursive;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 font-weight: bold;
                 cursor: pointer;
                 color:#AFEEEE;
@@ -48,7 +51,7 @@
                 font-weight: bold;
             }
             #link:hover{
-                color: #CD5C5C;
+                color: #DB7093;
                 text-decoration: none;
             }
             #link:active{
@@ -80,6 +83,7 @@
                 background-color: #3f3f3f;
                 color: #d5d5d5;
                 padding-top: 2rem;
+                margin-top: 1rem;
             }
             footer a{
                 color: #d5d5d5;
@@ -175,7 +179,7 @@
                             @guest
                                 @if (Route::has('login'))
                                     <li class="nav-item">
-                                        <a class="nav-link" id="link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        <a class="nav-link" id="link" href="{{ route('login') }}" style="border-left: 2px solid black">{{ __('Login') }}</a>
                                     </li>
                                 @endif
 
@@ -213,8 +217,7 @@
                 </div>
             </nav>
 
-            <main class="py-4">
-                @include('inc.messages')
+            <main>
                 @yield('content')
             </main>
         </div>
@@ -234,13 +237,12 @@
 
                     <h5 style="color: #EEE8AA"> Our Social Media </h5>
                     <div class="social" style="margin-top: 20px">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://web.facebook.com/StrathmoreUniversity?_rdc=1&_rdr" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/strathmore.university" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/StrathU" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.youtube.com/user/StrathmoreUniversity" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/school/strathmore-university/" target="_blank"><i class="fab fa-linkedin"></i></a>
                     </div>
-                    <p> (c) TMM + DKK </p>
                 </div>
                 <div class="col-md-4">
                     <hr class="light">

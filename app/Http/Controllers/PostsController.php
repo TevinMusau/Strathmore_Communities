@@ -54,24 +54,40 @@ class PostsController extends Controller
             'body'=>'required',
             'post_image'=>'image|nullable|max:1999'
         ]);
-        if($request->hasFile('post_image')){
+        if($request->hasFile('post_image'))
+        {
             $fileNameWithExt = $request->file('post_image')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
             $ext_type = $request->file('post_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$ext_type;
             $path = $request->file('post_image')->storeAs('public/cover_images/',$fileNameToStore);
+        
+            if ($request->input('category')==1) {
+                return back()->with('danger','You are not allowed to enter a post in this community');
+            } else {
+            $post = new Post;
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+            $post->user_id = auth()->user()->id;
+            $post->category_id = $request->input('category');
+            $post->post_image = $fileNameToStore;
+            $post->save();
+            return redirect('/categories')->with('success','Posts Created'); 
+            }
         }
-        if ($request->input('category')==1) {
-            return back()->with('danger','You are not allowed to enter a post in this community');
-        } else {
-        $post = new Post;
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->user_id = auth()->user()->id;
-        $post->category_id = $request->input('category');
-        $post->post_image = $fileNameToStore;
-        $post->save();
-        return redirect('home')->with('success','Posts Created'); 
+        else
+        {
+            if ($request->input('category')==1) {
+                return back()->with('danger','You are not allowed to enter a post in this community');
+            } else {
+            $post = new Post;
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+            $post->user_id = auth()->user()->id;
+            $post->category_id = $request->input('category');
+            $post->save();
+            return redirect('/categories')->with('success','Post Created'); 
+            }
         }
     }
 
@@ -99,7 +115,7 @@ class PostsController extends Controller
     {
         $posts = Post::find($id);
         $cat = Category::pluck('category_name','id')->toArray();
-        $selectedID = 1;
+        $selectedID = 4;
         //Check for Correct user
         if(auth()->user()->id !== $posts->user_id){
             return redirect('/posts')->with('danger','Unauthorized Page');
@@ -122,15 +138,15 @@ class PostsController extends Controller
             'category'=>'required',
             'body'=>'required'
         ]);
-        if ($request->input('category')==3) {
-            return redirect('/posts')->with('danger','You are not allowed to enter a post in this community');
+        if ($request->input('category')==1) {
+            return back()->with('danger','You are not allowed to enter a post in this community');
         } else {
         $posts = Post::find($id);
         $posts->title=$request->input('title');
         $posts->body=$request->input('body');
         $posts->category_id = $request->input('category');
         $posts->save();
-        return redirect('/posts')->with('success','Post Has Been Successfuly Updated!');
+        return redirect('/categories')->with('success','Post Has Been Successfully Updated!');
     }
 }
 
@@ -144,6 +160,6 @@ class PostsController extends Controller
     {
         $posts=Post::find($id);
         $posts->delete();
-        return redirect('/posts')->with('success','Post Has Been Successfuly Deleted!');
+        return redirect('/categories')->with('success','Post Has Been Successfully Deleted!');
     }
 }

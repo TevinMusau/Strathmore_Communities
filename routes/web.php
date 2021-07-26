@@ -22,9 +22,7 @@ use App\Http\Controllers\DashboardController;
 Auth::routes(['verify' => true]);
 
 /***************************************** VERIFICATION ROUTES *************************************/
-Route::get('/', function () {
-    return view('home');
-});
+
 //Gives link to verification notice
 Route::get('/email/verify', function () {
     return view('auth.verify');
@@ -34,13 +32,9 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/index');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-Route::resource('users','UsersController');
-Route::resource('posts','PostsController');
-Route::resource('categories','CategoriesController');
-Route::resource('comments','CommentsController');
-Route::resource('likes','LikesController');
+
 //Verification link resend
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
@@ -50,24 +44,30 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 /******************************************** PAGE ROUTES *****************************************/
 
-//Base Route
+/******* Base Route To Index Page ********/
 Route::get('/', function () {
-    return view('auth.login');
-});
+    return view('index');
+})->name('home');
 
-//Route to home page, only accessed when the user is logged in and verified
-Route::get('/home', function () {
-    return view('home');
-})->name('home')->middleware(['auth', 'verified']);
+Route::get('/index', function() {
+    return view('index');
+})->name('home');
 
-//Route to Related Links page
+/******* Related Links Page Route ********/
 Route::get('/other', function () 
 {
     return view('related');
 });
 
+/******* Functionality Routes ********/
+Route::resource('users','UsersController')->middleware(['auth', 'verified']);
+Route::resource('posts','PostsController');
+Route::resource('categories','CategoriesController');
+Route::resource('comments','CommentsController')->middleware(['auth', 'verified']);
+Route::resource('likes','LikesController')->middleware(['auth', 'verified']);
+
 //Route to specific user's dashboard based on their username. Calls the DashboardController
 //User must be verified and logged in to access
-Route::get('/dashboard/{username}', [DashboardController::class, 'show'])
-            ->name('dashboard')
-            ->middleware(['auth', 'verified']);
+// Route::get('/dashboard/{username}', [DashboardController::class, 'show'])
+//             ->name('dashboard')
+//             ->middleware(['auth', 'verified']);

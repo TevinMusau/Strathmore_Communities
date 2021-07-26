@@ -68,7 +68,7 @@ class UsersController extends Controller
     {
         $users = User::find($id);
         if(auth()->user()->id !== $users->id){
-            return redirect('/home')->with('danger','Unauthorized Page');
+            return redirect('/users/'.$users->id)->with('danger','You Do Not Have Permission To Edit This Page');
         }else{
             return view('users.edit')->with('users',$users);
         }
@@ -101,11 +101,11 @@ class UsersController extends Controller
         $user -> email = $request->input('email');
         $user -> adm_no = $request->input('adm_no');
         if($request->hasFile('user_image')){
-            Storage::delete('public/user_images/'.$user->user_image);
+            \Storage::delete('public/user_images/'.$user->user_image);
             $user->user_image = $fileNameToStore;
         }
         $user->save();
-        return redirect('/other')->with('success','User Profile Updated');
+        return redirect('/users/'.$user->id)->with('success','User Profile Updated');
     }
 
     /**
