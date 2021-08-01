@@ -8,8 +8,12 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Comment;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Comment extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     use HasFactory;
     public function post(){
         return $this->belongsTo(Post::class);

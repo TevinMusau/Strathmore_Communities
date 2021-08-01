@@ -66,7 +66,7 @@
                         </h4>
                         <hr class="light">
 
-                        @include('inc.messages')
+                        {{-- @include('inc.messages') --}}
 
                     @else
                         <h4 class="display 3 text-center">
@@ -74,7 +74,7 @@
                         </h4>
                         <hr class="light">
 
-                        @include('inc.messages')
+                        {{-- @include('inc.messages') --}}
                         
                     @endif
                 @endauth

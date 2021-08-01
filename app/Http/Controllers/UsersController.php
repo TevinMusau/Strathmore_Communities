@@ -13,6 +13,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('check.disabled',['except'=>['index','show']]);
         $this->middleware('auth');
     }
     /**
@@ -68,7 +69,7 @@ class UsersController extends Controller
     {
         $users = User::find($id);
         if(auth()->user()->id !== $users->id){
-            return redirect('/users/'.$users->id)->with('danger','You Do Not Have Permission To Edit This Page');
+            return redirect('/users/'.auth()->user()->id)->with('danger','You Do Not Have Permission To Edit This Page');
         }else{
             return view('users.edit')->with('users',$users);
         }

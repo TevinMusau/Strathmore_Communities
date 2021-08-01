@@ -13,6 +13,7 @@ class PostsController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('check.disabled',['except'=>['index','show']]);
         $this->middleware('auth',['except'=>['index','show']]);
     }
     /**
@@ -22,7 +23,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at','desc')->simplePaginate(10);
+        $posts = Post::orderBy('created_at','desc')->where('published',0)->simplePaginate(10);
         return view('posts.index')->with('posts',$posts);
     }
 
@@ -65,14 +66,14 @@ class PostsController extends Controller
             if ($request->input('category')==1) {
                 return back()->with('danger','You are not allowed to enter a post in this community');
             } else {
-            $post = new Post;
-            $post->title = $request->input('title');
-            $post->body = $request->input('body');
-            $post->user_id = auth()->user()->id;
-            $post->category_id = $request->input('category');
-            $post->post_image = $fileNameToStore;
-            $post->save();
-            return redirect('/categories')->with('success','Posts Created'); 
+                $post = new Post;
+                $post->title = $request->input('title');
+                $post->body = $request->input('body');
+                $post->user_id = auth()->user()->id;
+                $post->category_id = $request->input('category');
+                $post->post_image = $fileNameToStore;
+                $post->save();
+                return redirect('categories')->with('success','Posts Created'); 
             }
         }
         else

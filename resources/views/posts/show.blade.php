@@ -30,12 +30,16 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 text-center m-4">
+                <div class="col-md-4 text-center m-4">
                     @auth
                         {!!Form::open(['action'=>['LikesController@store'],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
                             {{Form::hidden('user_id',Auth::user()->id)}}
                             {{Form::hidden('posts_id',$posts->id)}}
                             {{Form::submit('Upvote',['class'=>'btn btn-outline-success'])}}
+                        {!!Form::close()!!}
+                        {!!Form::open(['action'=>['LikesController@destroy',$posts->id],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
+                            {{Form::hidden('_method','DELETE')}}
+                            {{Form::submit('Downvote',['class'=>'btn btn-outline-danger'])}}
                         {!!Form::close()!!}
                     @endauth
                         <span class="p-2">
@@ -45,14 +49,14 @@
                 
                 <div class="card-footer text-muted text-right">
                     <span class="p-2" style="border-right: 1px solid black">
-                        By <a href="/users/{{$posts->user_id}}">{{$uname}}</a>
+                        By <a href="/users/{{$posts->user_id}}">{{$posts->user->username}}</a>
                     </span>
 
                     <span class="p-2">
                         {{$posts->created_at->diffForHumans()}}
                     </span>   
 
-                    <div class="row">            
+                    <div class="row" style="float: left">            
                         @auth
                             @if (Auth::user()->id==$posts->user_id)
                             <div class="justify-content-end m-1">
@@ -74,7 +78,9 @@
                 </div>
             </div>
         </div>
-
+<br><br><br>
+<br><br><br>
+<br><br><br>
         <div class="row justify-content-center">
             <div class="col-md-11 card m-3">
                 <div class="row justify-content-center">

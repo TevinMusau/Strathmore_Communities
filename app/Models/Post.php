@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -12,10 +13,13 @@ use App\Models\Like;
 use App\Models\Comment;
 class Post extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+    protected $fillable =['category_id'];
     use HasFactory;
-    public function likedBy(User $user)
+    public function likedBy(int $user, int $post)
     {
-        $checker = DB::table('likes')->where('user_id',$user->id)->value('user_id');
+        $checker = DB::table('likes')->where('user_id',$user)->where('post_id',$post)->value('user_id');
         if ($checker == null) {
             return TRUE;
         } else {

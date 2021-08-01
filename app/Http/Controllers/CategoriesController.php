@@ -11,6 +11,10 @@ use App\Models\Category;
 use App\Models\Like;
 class CategoriesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth',['except'=>['index','show']]);
+        $this->middleware('check.disabled',['except'=>['index','show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -51,7 +55,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $cat = DB::table('posts')->where('category_id',$id)->orderBy('created_at','desc')->get();
+        $cat = DB::table('posts')->where('published',0)->where('category_id',$id)->where('deleted_at',null)->orderBy('created_at','desc')->get();
         $catinfo = Category::find($id);
         return view('categories.show')->with('cat',$cat)->with('catinfo',$catinfo);
     }
