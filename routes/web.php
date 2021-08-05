@@ -64,6 +64,9 @@ Route::get('/other', function ()
 Route::resource('posts','PostsController')->middleware('auth');
 Route::resource('categories','CategoriesController');
 Route::resource('users','UsersController')->middleware('auth');
+Route::resource('flags','FlagsController')->middleware('auth');
+Route::resource('events','EventsController')->middleware('auth');
+Route::resource('eventuser','EventUserController')->middleware('auth');
 Route::resource('comments','CommentsController')->middleware('auth');
 Route::resource('likes','LikesController')->middleware('auth');
 

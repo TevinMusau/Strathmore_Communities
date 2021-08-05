@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Flag;
+use App\Models\Event;
 use App\Models\Comment;
 class Post extends Model
 {
@@ -38,5 +40,11 @@ class Post extends Model
     }
     public function likes(){
         return $this->hasMany(Like::class);
+    }
+    public function flags(){
+        return $this->hasMany(Flag::class);
+    }
+    public function events(){
+        return $this->hasMany(Event::class);
     }
 }
