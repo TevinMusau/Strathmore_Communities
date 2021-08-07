@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 class CommentsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check.disabled',['except'=>['index','show']]);
+    }
     /**
      * Display a listing of the resource.
      *

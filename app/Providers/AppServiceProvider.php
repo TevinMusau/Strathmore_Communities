@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use TCG\Voyager\Facades\Voyager;
+use Illuminate\Events\Dispatcher;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Voyager::addAction(\App\Actions\Disable::class);
+        Voyager::addAction(\App\Actions\Reset::class);
+
     }
 }

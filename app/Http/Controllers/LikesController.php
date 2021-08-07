@@ -11,6 +11,9 @@ use App\Models\Category;
 use App\Models\Like;
 class LikesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check.disabled',['except'=>['index','show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,10 +43,10 @@ class LikesController extends Controller
     public function store(Request $request)
     {
         $posts = new Post();
-        if ($posts->likedBy($request->user())==TRUE) {
+        if ($posts->likedBy($request->input('user_id'),$request->input('posts_id'))==TRUE) {
             $this->validate($request,[
             'user_id'=>'required',
-            'posts_id'=>'nullable'
+            'posts_id'=>'required'
          ]);
             $like = new Like();
             $like->user_id = auth()->user()->id;
@@ -97,6 +100,13 @@ class LikesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $posts = new Post();
+        if ($posts->likedBy(auth()->user()->id,$id)==FALSE) {
+            $like = DB::table('likes')->where('user_id',auth()->user()->id)->where('post_id',$id);
+            $like->delete();
+            return back()->with('success','You Have unliked this post');
+        }else{
+        return back()->with('danger','You have not liked this post');
+        }
     }
 }

@@ -60,14 +60,24 @@ Route::get('/other', function ()
 });
 
 /******* Functionality Routes ********/
-Route::resource('users','UsersController')->middleware(['auth', 'verified']);
-Route::resource('posts','PostsController');
+
+Route::resource('posts','PostsController')->middleware('auth');
 Route::resource('categories','CategoriesController');
-Route::resource('comments','CommentsController')->middleware(['auth', 'verified']);
-Route::resource('likes','LikesController')->middleware(['auth', 'verified']);
+Route::resource('users','UsersController')->middleware('auth');
+Route::resource('flags','FlagsController')->middleware('auth');
+Route::resource('events','EventsController')->middleware('auth');
+Route::resource('eventuser','EventUserController')->middleware('auth');
+Route::resource('comments','CommentsController')->middleware('auth');
+Route::resource('likes','LikesController')->middleware('auth');
 
 //Route to specific user's dashboard based on their username. Calls the DashboardController
 //User must be verified and logged in to access
 // Route::get('/dashboard/{username}', [DashboardController::class, 'show'])
 //             ->name('dashboard')
 //             ->middleware(['auth', 'verified']);
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('users/reset','UserReset@reset')->name('users.reset');
+    Route::get('users/disable','UserDisable@disable')->name('users.disable');
+    Voyager::routes();
+});

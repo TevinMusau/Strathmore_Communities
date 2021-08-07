@@ -218,6 +218,8 @@
             </nav>
 
             <main>
+                @include('inc.messages')
+                @include('inc.messages')
                 @yield('content')
             </main>
         </div>
