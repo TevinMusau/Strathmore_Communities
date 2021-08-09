@@ -133,7 +133,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">Administration</h4>
                         <p class="card-text">Administration</p>
-                        <a href="#" class="btn btn-outline-info btn-lg">See Community</a>
+                        <a href="/categories/1" class="btn btn-outline-info btn-lg">See Community</a>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">Student Council</h4>
                         <p class="card-text">Student Council</p>
-                        <a href="#" class="btn btn-outline-info btn-lg">See Community</a>
+                        <a href="/categories/2" class="btn btn-outline-info btn-lg">See Community</a>
                     </div>
                 </div>
             </div>
@@ -155,7 +155,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">Career and Internship Opportunities</h4>
                         <p class="card-text">Career and Internship Opportunities</p>
-                        <a href="#" class="btn btn-outline-info btn-lg">See Community</a>
+                        <a href="/categories/5" class="btn btn-outline-info btn-lg">See Community</a>
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">Strathmore Communications</h4>
                         <p class="card-text">Strathmore Communications</p>
-                        <a href="#" class="btn btn-outline-info btn-lg">See Community</a>
+                        <a href="/categories/3" class="btn btn-outline-info btn-lg">See Community</a>
                     </div>
                 </div>
             </div>

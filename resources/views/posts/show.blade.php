@@ -251,7 +251,12 @@
 
                                 <div class="card-footer text-muted text-right p-3">
                                     <p>
-                                        <span>By: <a href="/users/{{$item->user->id}}">{{$item->user->username}}</a></span>
+                                        {{-- Changed this because the object being accessed needs to be a member of the posts table --}}
+                                        <span>By: 
+                                            <a href="/users/{{ $item->user_id }}">
+                                                {{ $uname }}
+                                            </a>
+                                        </span>
                                     </p>
                                     <p>
                                         <span class="font-italic">Created: </span>{{$item->created_at->diffForHumans()}}

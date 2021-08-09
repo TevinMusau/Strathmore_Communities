@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
+use App\Rules\IsAllowedDomain;
 
 class RegisterController extends Controller
 {
@@ -51,9 +52,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         //Input Validation
+        //Ensure emails accepted are Strathmore Emails
         return Validator::make($data, [
             'adm_no' => ['required', 'integer', 'min:5', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new IsAllowedDomain],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
