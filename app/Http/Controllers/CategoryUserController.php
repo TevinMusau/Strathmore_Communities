@@ -34,7 +34,20 @@ class CategoryUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoryCheck = new Event;
+        $this->validate($request,[
+            'category_id'=>'required',
+            'user_id'=>'required'
+        ]);
+        if ($categoryCheck->checkJoined($request->input('user_id'),$request->input('category_id'))==TRUE) {
+            $category = DB::table('category_user')->insertOrIgnore([
+                'category_id'=>$request->input('category_id'),
+                'user_id'=>$request->input('user_id')
+            ]);
+            return back()->with('success','You Have Joined This Event.');
+        } else {
+            return back()->with('danger','You have already Joined this category.');
+        }
     }
 
     /**
@@ -45,20 +58,7 @@ class CategoryUserController extends Controller
      */
     public function show($id)
     {
-        $categoryCheck = new Category;
-        $this->validate($request,[
-            'category_id'=>'required',
-            'user_id'=>'required'
-        ]);
-        if ($categoryCheck->checkJoined($request->input('user_id'),$request->input('category_id'))==TRUE) {
-            DB::table('category_user')->insertOrIgnore([
-                'event_id'=>$request->input('event_id'),
-                'user_id'=>$request->input('user_id')
-            ]);
-            return back()->with('success','You Have Joined This Community.');
-        } else {
-            return back()->with('danger','You have already Joined this Community.');
-        }
+        //
     }
 
     /**

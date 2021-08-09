@@ -89,8 +89,6 @@
                                 <br><br>
                                 
                                 <p style="text-align: center"> New around here? <a href="{{ route('register') }}">Register</a> Here</p>
-                                <br>
-                                <p style="text-align: center"><a href="/admin/login" class="btn btn-link">Admin Side</a></p>
                             </div>
                         </div>
                     </form>

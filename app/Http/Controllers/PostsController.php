@@ -34,8 +34,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //$cat = Category::pluck('category_name','id')->toArray();
-        $cat = DB::table('categories')->pluck('category_name','id')->toArray();
+        $cat = Category::pluck('category_name','id')->toArray();
         $selectedID = 4;
         return view('posts.create')->with('cat',$cat)->with('selectedID',$selectedID);
 
@@ -49,7 +48,6 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $denied = 'You are not allowed to enter a post in this community';
         $adm_id = DB::table('categories')->where('category_name','Administration')->pluck('id');
         $this->validate($request,[
             'title'=>'required',
@@ -66,7 +64,7 @@ class PostsController extends Controller
             $path = $request->file('post_image')->storeAs('public/cover_images/',$fileNameToStore);
         
             if ($request->input('category')==1) {
-                return back()->with('danger',$denied);
+                return back()->with('danger','You are not allowed to enter a post in this community');
             } else {
                 $post = new Post;
                 $post->title = $request->input('title');
@@ -81,7 +79,7 @@ class PostsController extends Controller
         else
         {
             if ($request->input('category')==1) {
-                return back()->with('danger',$denied);
+                return back()->with('danger','You are not allowed to enter a post in this community');
             } else {
             $post = new Post;
             $post->title = $request->input('title');
