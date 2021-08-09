@@ -3,17 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Flag;
-use App\Models\Post;
-use Illuminate\Support\Facades\DB;
 
-class FlagsController extends Controller
+class CategoryUserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('check.disabled',['except'=>['index','show']]);
-        $this->middleware('auth',['except'=>['index','show']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +13,7 @@ class FlagsController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -42,19 +34,7 @@ class FlagsController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $this->validate($request,[
-            'flag_for'=>'required'
-        ]);
-        $flag = new Flag;
-        $flag->post_id = $request->input('post_id');
-        $flag->user_id = auth()->user()->id;
-        $flag->post_title = $request->input('post_title');
-        $flag->flag_for = $request->input('flag_for');
-        $flag->extra = $request->input('extra');
-        $flag->save();
-        $home = $request->input('posts_id');
-        return back()->with('success','This Post has been Flagged.'); 
+        //
     }
 
     /**
@@ -65,10 +45,20 @@ class FlagsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        //  $flag = Flag::where('post_id',$id)->get();
-        // $flag = DB::table('flags')->where('post_id',$id)->get();
-        return view('flags.show')->with('post',$post);
+        $categoryCheck = new Category;
+        $this->validate($request,[
+            'category_id'=>'required',
+            'user_id'=>'required'
+        ]);
+        if ($categoryCheck->checkJoined($request->input('user_id'),$request->input('category_id'))==TRUE) {
+            DB::table('category_user')->insertOrIgnore([
+                'event_id'=>$request->input('event_id'),
+                'user_id'=>$request->input('user_id')
+            ]);
+            return back()->with('success','You Have Joined This Community.');
+        } else {
+            return back()->with('danger','You have already Joined this Community.');
+        }
     }
 
     /**

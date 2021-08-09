@@ -69,7 +69,7 @@ Route::resource('events','EventsController')->middleware('auth');
 Route::resource('eventuser','EventUserController')->middleware('auth');
 Route::resource('comments','CommentsController')->middleware('auth');
 Route::resource('likes','LikesController')->middleware('auth');
-
+Route::resource('categotyuser','CategoryUserController')->middleware('auth');
 //Route to specific user's dashboard based on their username. Calls the DashboardController
 //User must be verified and logged in to access
 // Route::get('/dashboard/{username}', [DashboardController::class, 'show'])

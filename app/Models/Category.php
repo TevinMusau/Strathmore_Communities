@@ -11,7 +11,19 @@ class Category extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     use HasFactory;
+    public function checkJoined(int $user, int $category)
+    {
+        $checker = DB::table('category_user')->where('user_id',$user)->where('category_id',$category)->value('user_id');
+        if ($checker == null) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
     public function posts(){
         return $this->hasMany(Post::class);
+    }
+    public function users(){
+        return this->belongsToMany(User::class);
     }
 }
