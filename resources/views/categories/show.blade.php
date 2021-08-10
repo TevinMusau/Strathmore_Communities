@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('inc.messages')
 <style>
     #postTitle{
         color: goldenrod;
@@ -18,6 +19,22 @@
     <div class="container">
         <div class="row justify-content-center">
             <h2 class="p-4">{{$catinfo->category_name}} Category</h2>
+        </div>
+        <div class="row justify-content-center">
+            <h3 class="p-4">{{$catinfo->about}}</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col ">{{$catinfo->users->count()}} {{Str::plural('Member',$catinfo->users->count())}}</div>
+            @auth
+            <div class="col ">
+                {!!Form::open(['action'=>['CategoryUserController@store'],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
+                    {{Form::hidden('user_id',Auth::user()->id)}}
+                    {{Form::hidden('category_id',$catinfo->id)}}
+                    {{Form::submit('Join Community',['class'=>'btn btn-outline-success'])}}
+                {!!Form::close()!!}
+            </div>    
+            @endauth
+            
         </div>
         <hr class="light">
 

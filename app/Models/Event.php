@@ -23,7 +23,8 @@ class Event extends Model
             return TRUE;
         } else {
             return FALSE;
-        }}
+        }
+    }
     public function post(){
         return $this->belongsTo(Post::class);
     }

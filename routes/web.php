@@ -69,13 +69,15 @@ Route::resource('events','EventsController')->middleware('auth');
 Route::resource('eventuser','EventUserController')->middleware('auth');
 Route::resource('comments','CommentsController')->middleware('auth');
 Route::resource('likes','LikesController')->middleware('auth');
-
+Route::resource('categoryuser','CategoryUserController')->middleware('auth');
 //Route to specific user's dashboard based on their username. Calls the DashboardController
 //User must be verified and logged in to access
 // Route::get('/dashboard/{username}', [DashboardController::class, 'show'])
 //             ->name('dashboard')
 //             ->middleware(['auth', 'verified']);
-
+Route::group(['prefix'=>'pdf'],function(){
+    Route::get('event/{id}','GeneratePDFController@event');
+});
 Route::group(['prefix' => 'admin'], function () {
     Route::get('users/reset','UserReset@reset')->name('users.reset');
     Route::get('users/disable','UserDisable@disable')->name('users.disable');
