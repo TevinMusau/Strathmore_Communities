@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Flag;
+use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 class FlagsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('check.disabled',['except'=>['index','show']]);
+        $this->middleware('auth',['except'=>['index','show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class FlagsController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -58,7 +65,10 @@ class FlagsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        //  $flag = Flag::where('post_id',$id)->get();
+        // $flag = DB::table('flags')->where('post_id',$id)->get();
+        return view('flags.show')->with('post',$post);
     }
 
     /**

@@ -20,7 +20,7 @@ class Category extends Model
     use HasFactory;
     public function checkJoined(int $user, int $category)
     {
-        $checker = DB::table('category_user')->where('user_id',$user)->where('category_id',$event)->value('user_id');
+        $checker = DB::table('category_user')->where('user_id',$user)->where('category_id',$category)->value('user_id');
         if ($checker == null) {
             return TRUE;
         } else {

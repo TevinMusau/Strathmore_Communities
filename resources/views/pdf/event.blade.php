@@ -1,5 +1,29 @@
-@extends('layouts.app')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>Strathmore Communities</title>
+
+        <!-- Scripts -->
+        <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+</head>
+<body>
     <div class="container-fluid">
         <div class="row ">
             <div class="col">
@@ -29,18 +53,6 @@
             <br>
             <p>{{$event->user->username}}</p>
             </div>
-            <div class="col">
-                <h5>Action:</h5>
-                <br>
-                    {!!Form::open(['action'=>['EventUserController@store'],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
-                        {{Form::hidden('user_id',Auth::user()->id)}}
-                        {{Form::hidden('event_id',$event->id)}}
-                        {{Form::submit('Join Event',['class'=>'btn btn-outline-success'])}}
-                    {!!Form::close()!!}
-            </div>
-            {{-- <div class="col"><br><br>
-                    <a href="/pdf/event/{{$event->id}}" class="btn btn-link">Make PDF</a>
-            </div> --}}
         </div>
         <div class="row">
             @if (count($event->users)>0)
@@ -74,4 +86,5 @@
             
         </div>
     </div>
-@endsection
+</body>
+</html>
