@@ -12,7 +12,6 @@
         <!-- Scripts -->
         <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
-
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -216,7 +215,6 @@
                     </div>
                 </div>
             </nav>
-
             <main>
                 {{-- @include('inc.messages')
                 @include('inc.messages') --}}

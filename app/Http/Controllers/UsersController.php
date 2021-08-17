@@ -56,7 +56,18 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show')->with('user',$user)->with('posts',$user->posts);
+        // dd($user->events);
+        $err_message = 'The has been banned!';
+        $err_message1 = 'The user does not exist!';
+        if($user != null){
+            if($user->deleted_at == null){
+                return view('users.show')->with('user',$user)->with('posts',$user->posts);
+            }else{
+                return view('index')->with('danger',$err_message);
+            }
+        }else{
+            return view('index')->with('danger',$err_message1);
+        }
     }
 
     /**
@@ -86,6 +97,7 @@ class UsersController extends Controller
     {
         $this->validate($request,[
             'username'=>'required',
+            'name'=>'required',
             'adm_no'=>'required',
             'email'=>'required',
             'user_image'=>'image|nullable|max:1999'
@@ -98,6 +110,7 @@ class UsersController extends Controller
             $path = $request->file('user_image')->storeAs('public/cover_images/',$fileNameToStore);
         }
         $user=User::find($id);
+        $user -> name = $request->input('name');
         $user -> username = $request->input('username');
         $user -> email = $request->input('email');
         $user -> adm_no = $request->input('adm_no');

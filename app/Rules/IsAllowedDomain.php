@@ -23,6 +23,11 @@ class IsAllowedDomain implements Rule
      * @param  mixed  $value
      * @return bool
      */
+
+    protected $allowedDomains = [
+        'strathmore.edu',
+     ];
+
     public function passes($attribute, $value)
     {
         $domain = substr(strrchr($value, "@"), 1);
@@ -33,10 +38,6 @@ class IsAllowedDomain implements Rule
         return false;
     }
 
-    protected $allowedDomains = [
-        'strathmore.edu',
-     ];
-
     /**
      * Get the validation error message.
      *
@@ -44,6 +45,6 @@ class IsAllowedDomain implements Rule
      */
     public function message()
     {
-        return 'Email Must be a Strathmore University Email';
+        return 'Email Address must be a Strathmore Email Address';
     }
 }

@@ -16,12 +16,12 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('post_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->string('event_title');
             $table->string('about');
             $table->string('location')->nullable();
-            $table->date('deadline');
+            $table->timestamp('deadline');
             $table->softDeletes();
             $table->timestamps();
         });

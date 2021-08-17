@@ -25,6 +25,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
     ];
 
     /**
@@ -36,17 +37,8 @@ class Kernel extends HttpKernel
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-
-            /*
-             * Comment line 46 out and added \Illuminate\View\Middleware\ShareErrorsFromSession::class to $middleware above
-             * Analysis: By default Laravel Add web Middleware. check by php artisan route:list it shows web, web,auth .
-             * https://stackoverflow.com/questions/34648930/laravel-session-flash-message-not-working
-            */
-
             // \Illuminate\Session\Middleware\StartSession::class,
-
-
-            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
             
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

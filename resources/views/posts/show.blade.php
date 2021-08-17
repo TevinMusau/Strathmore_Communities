@@ -4,6 +4,15 @@
         @include('inc.messages')
         <div class="row justify-content-center">
             <div class="col-md-11 card text-center m-3">
+                @if(count($posts->flags)>0)
+                    <div class="row justify-content-start">
+                        <div class="alert alert-danger" style="width: 100%" role="alert">
+                            This post has {{$posts->flags->count()}} {{Str::plural('count',$posts->flags->count())}} of flags that have been created.
+                            <br>
+                            <a href="/flags/{{$posts->id}}" class="btn btn-link">Click on this to see a report of flags</a>
+                        </div>
+                    </div>
+                @endif
                 <div class="row justify-content-center">
                     <div class="p-4">
                         <h1 class="font-weight-bold">
@@ -164,7 +173,7 @@
                                             </div>
                                             {{Form::text('event_title','',['class'=>'form-control','placeholder'=>'Title'])}}
                                         </div>
-                                        <div class="form-group-row">
+                                        <div class="form-group-row" >
                                             <div class="row justify-content-center text-secondary p-3 font-weight-bold h4">
                                             {{Form::label('deadline','Event Date:')}}
                                             </div>
@@ -251,12 +260,7 @@
 
                                 <div class="card-footer text-muted text-right p-3">
                                     <p>
-                                        {{-- Changed this because the object being accessed needs to be a member of the posts table --}}
-                                        <span>By: 
-                                            <a href="/users/{{ $item->user_id }}">
-                                                {{ $uname }}
-                                            </a>
-                                        </span>
+                                        <span>By: <a href="/users/{{$item->id}}">{{$uname}}</a></span>
                                     </p>
                                     <p>
                                         <span class="font-italic">Created: </span>{{$item->created_at->diffForHumans()}}
@@ -307,7 +311,7 @@
             }
         }
         $('#datetimepicker').datetimepicker({
-    format: 'yyyy-mm-dd'
-});
+            format: 'yyyy-mm-ddTHH:mm:ss.sssZ'
+        });
     </script>
 @endsection

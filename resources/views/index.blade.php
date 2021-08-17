@@ -87,7 +87,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-12">
                 <p class="lead">
                     <span class="font-weight-bold" style="font-size: 1.5rem">Strathmore Communities:</span>
-                     A Web Application Designed to reduce Information Overload in Strathmore University
+                     A Web Application Designed to enhance Information Dissemination and reduce Information Overload in Strathmore University
                 </p>
             </div>
             <br>
