@@ -15,8 +15,8 @@ class CreateFlagsTable extends Migration
     {
         Schema::create('flags', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('post_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->string('post_title');
             $table->string('flag_for');
             $table->longText('extra');

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('inc.messages')
 <style>
     #postTitle{
         color: #A0522D;

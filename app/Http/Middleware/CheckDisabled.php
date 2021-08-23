@@ -24,15 +24,10 @@ class CheckDisabled
      */
     public function handle(Request $request, Closure $next)
     {
-        $id = Auth::user()->id;
-        $user = new User;
-        if ($user->checkDisabled($id)==TRUE) {
-            return $next($request);
-        } else {
-            return redirect('users/'.strval($id))
-            ->with('danger','Your Account has been disabled. Kindly contact SCommunities@gmail.com for further assistance');
-            //->with('danger','Your Account has been disabled. Kindly contact SCommunities@gmail.com for further assistance');
+        if(!auth()->check() || auth()->user()->disabled){
+            abort(403);
         }
+        return $next($request);
         
     }
 }

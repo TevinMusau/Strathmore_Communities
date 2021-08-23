@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@include('inc.messages')
 <style>
     #tabBTN{
         background-color: #FFF8DC;

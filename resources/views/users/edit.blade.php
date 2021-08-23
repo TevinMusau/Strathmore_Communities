@@ -20,11 +20,13 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row justify-content-center">
-                                    <div class="col-md-9 p-2">
-                                        {{Form::text('name',$users->name,['class'=>'form-control','placeholder'=>'Name'])}}
-                                    </div>
-                                </div>
+                    <div class="form-group row">
+                        {{Form::text('name',$users->name,['class'=>'form-control','placeholder'=>'Name'])}}
+                    </div>
+
+                    <div class="form-group row">
+                        {{Form::text('adm_no',$users->adm_no,['class'=>'form-control','placeholder'=>'Admission Number'])}}
+                    </div>
 
                                 <div class="form-group row justify-content-center">
                                     <div class="col-md-9 p-2">
