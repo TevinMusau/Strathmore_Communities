@@ -26,9 +26,20 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <span class="p-2">
+                    <details>
+                        <summary>Time Stamps:</summary>
+                        <summary>Created:</summary>
                         {{$posts->created_at->diffForHumans()}}
-                    </span>  
+                        <summary>Updated:</summary>
+                        @if ($posts->updated_at == null)
+                            <span class="p-2">This post had not been updated.</span>
+                        @else
+                            {{$posts->updated_at->diffForHumans()}}
+                        @endif
+                    </details><br>
+                    {{-- <span class="p-2">
+                        {{$posts->created_at->diffForHumans()}}
+                    </span>   --}}
                 </div>
                 @if ($posts->post_image)
                 <div class="row justify-content-center p-3">
@@ -253,35 +264,92 @@
                     <br>
                         <div class="row justify-content-start m-2">
                             <div class="card" style="width: 100%">
-                                <div class="card-body">
+                                <div class="card-body" style="height: 75%">
                                     <?php echo $item->comment; ?>
                                     <br>
                                 </div>
 
-                                <div class="card-footer text-muted text-right p-3">
+
+                                <div class="card-footer text-muted  p-3">
+
                                     <p>
-                                        <span>By: <a href="/users/{{$item->id}}">{{$uname}}</a></span>
-                                    </p>
-                                    <p>
+                                        <span>By: <a href="/users/{{$item->user->id}}">{{$item->user->username}}</a></span><br>
                                         <span class="font-italic">Created: </span>{{$item->created_at->diffForHumans()}}
                                     </p>
+                                    @auth
+                                        <div class="float-left">
+                                            <button class="btn btn-success" data-id="{{$item->id}}" onclick="show({{$item->id}});">Reply</button>
+                                        </div>    
+                                        <div class="float-right">
+                                                @if (Auth::user()->id==$item->user_id)
+                                                        {!!Form::open(['action'=>['CommentsController@destroy',$item->id],'method'=>'POST','class'=>'pull-right',
+                                                        'onsubmit'=>"return confirm('Confirm Comment Deletion?');"])!!}
+                                                            {{Form::hidden('_method','DELETE')}}
+                                                            {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger'])}}
+                                                        {!!Form::close()!!}
+                                                @else
+                                                    
+                                                @endif
+                                            
+                                        </div>
+                                        <div id="reply-{{$item->id}}" class="row justify-content-start" style="display: none">
+                                            {!! Form::open(['action'=>['ReplyController@store'],'method'=>'POST','onsubmit'=>"return confirm('Confirm Comment Creation?');"]) !!}
+                                                <div class="form-group-row ">
+                                                    <div class="row justify-content-center">
+                                                        {{Form::textarea('reply','',['class'=>'ckeditor form-control','placeholder'=>'Body'])}}
+                                                    </div>
+                                                </div>
 
-                                    <div class="float-right">
-                                        @auth
-                                            @if (Auth::user()->id==$item->user_id)
-                                                    {!!Form::open(['action'=>['CommentsController@destroy',$item->id],'method'=>'POST','class'=>'pull-right',
-                                                    'onsubmit'=>"return confirm('Confirm Comment Deletion?');"])!!}
-                                                        {{Form::hidden('_method','DELETE')}}
-                                                        {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger'])}}
-                                                    {!!Form::close()!!}
-                                            @else
-                                                
-                                            @endif
-                                        @endauth
-                                    </div>
+                                                {{Form::hidden('user_id',Auth::user()->id)}}
+                                                {{Form::hidden('comment_id',$item->id)}}
+
+                                                <div class="row justify-content-center p-3">
+                                                    {{Form::submit('Submit Comment',['class'=>'btn btn-outline-success', 'style'=>'width: 20%'])}}
+                                                </div>
+                                            {!!Form::close()!!}
+                                        </div>
+                                        <br><br>
+                                        <div class="m-2">
+                                            <div class="float-left">
+                                                <button class="btn btn-link" data-id="{{$item->id}}" onclick="showR({{$item->id}});">Show replies.</button>
+                                            </div>
+                                            <br><br>
+                                            <div id="Creply-{{$item->id}}" class="row justify-content-start" style="display: none">
+                                                @if (count($item->replies)>0)
+                                                    @foreach ($item->replies as $item)
+                                                        <div class="card">
+                                                            <div class="card-body"><?php echo $item->reply; ?></div>
+                                                            <div class="card-footer">
+                                                                <p>
+                                                                    <span>By: <a href="/users/{{$item->id}}">{{$item->user->username}}</a></span><br>
+                                                                    <span class="font-italic">Created: </span>{{$item->created_at->diffForHumans()}}
+                                                                </p>
+                                                                <div class="float-right">
+                                                                    @if (Auth::user()->id==$item->user_id)
+                                                                            {!!Form::open(['action'=>['ReplyController@destroy',$item->id],'method'=>'POST','class'=>'pull-right',
+                                                                            'onsubmit'=>"return confirm('Confirm Reply Deletion?');"])!!}
+                                                                                {{Form::hidden('_method','DELETE')}}
+                                                                                {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger'])}}
+                                                                            {!!Form::close()!!}
+                                                                    @else
+                                                                        
+                                                                    @endif
+                                                                
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <span class="m-2">This comment has no replies.</span>
+                                                @endif
+                                            </div>
+                                         </div>
+                                    @endauth
                                 </div>
                             </div>
+                            
                         </div>
+                        
                     @endforeach
                 @else
                     <h4 class="text-center">
@@ -296,6 +364,26 @@
         function Openform()
         {
             var x = document.getElementById("form1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function show(id){
+            var $toggle = $(this); 
+            var elementTar = "reply-"+id;
+            var x = document.getElementById(elementTar);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function showR(id){
+            var $toggle = $(this); 
+            var elementTar = "Creply-"+id;
+            var x = document.getElementById(elementTar);
             if (x.style.display === "none") {
                 x.style.display = "block";
             } else {

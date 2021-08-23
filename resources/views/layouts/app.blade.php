@@ -12,6 +12,8 @@
         <!-- Scripts -->
         <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -28,6 +30,14 @@
             background-image: url('/images/shattered.png');
         } */
             #title{
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-weight: bold;
+                cursor: pointer;
+                color:#000000;
+                font-size: 25px;
+                padding: 15px;
+            }
+            #titleUrl{
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 font-weight: bold;
                 cursor: pointer;
@@ -148,7 +158,7 @@
         <div id="app" style="background-color: white">
             <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm sticky-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="{{ url('/') }}" id="title"> 
+                    <a class="navbar-brand" href="{{ url('/') }}" id="titleUrl"> 
                         {{-- <img src="{{ asset('/images/logo_white.png') }}" id="Logo1" class="img-fluid" /> --}}
                         Strathmore Communities
                     </a>
