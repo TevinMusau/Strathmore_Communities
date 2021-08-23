@@ -26,14 +26,15 @@
 
         <!-- Additional Styles -->
         <style>
-            /* main{
-            background-image: url('/images/shattered.png');
-        } */
+              main{
+            background-image: url({{ asset('images/patterns/wall4.png') }})
+        } 
             #title{
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 font-weight: bold;
                 cursor: pointer;
-                color:#000000;
+
+                color:#B0C4DE;
                 font-size: 25px;
                 padding: 15px;
             }
@@ -53,34 +54,34 @@
             }
             #link{
                 font-size: 1.1em !important;
-                color: #DAA520;
+                color: #DEB887;
                 text-decoration: none;
                 padding: 15px;
                 text-align: center;
                 font-weight: bold;
             }
             #link:hover{
-                color: #DB7093;
+                color: #FFDEAD;
                 text-decoration: none;
             }
             #link:active{
-                color: orange;
+                color: #CD853F;
                 text-decoration: none;
             }
             #navbarDropdown{
                 font-size: 1.1em !important;
-                color: #DAA520;
+                color: #DEB887;
                 text-decoration: none;
                 padding: 15px;
                 text-align: center;
                 font-weight: bold;
             }
             #navbarDropdown:hover{
-                color: #CD5C5C;
+                color: #FFDEAD;
                 text-decoration: none;
             }
             #navbarDropdown:active{
-                color: orange;
+                color: #CD853F;
                 text-decoration: none;
             }
             #footer_logo{
@@ -156,9 +157,9 @@
     <!-- Start of Header -->
     <header>
         <div id="app" style="background-color: white">
-            <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm sticky-top">
+            <nav class="navbar navbar-expand-md navbar-light shadow-sm sticky-top" style="background-color: #26282A">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="{{ url('/') }}" id="titleUrl"> 
+                    <a class="navbar-brand" href="{{ url('/') }}" id="title" style="text-shadow: 2px 2px black;"> 
                         {{-- <img src="{{ asset('/images/logo_white.png') }}" id="Logo1" class="img-fluid" /> --}}
                         Strathmore Communities
                     </a>
@@ -188,7 +189,7 @@
                             @guest
                                 @if (Route::has('login'))
                                     <li class="nav-item">
-                                        <a class="nav-link" id="link" href="{{ route('login') }}" style="border-left: 2px solid black">{{ __('Login') }}</a>
+                                        <a class="nav-link" id="link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                     </li>
                                 @endif
 

@@ -2,11 +2,11 @@
 @section('content')
 <style>
     a{
-        color: goldenrod;
+        color: #A0522D;
         text-decoration: none;
     }
     a:hover{
-        color: salmon;
+        color: #B8860B;
         text-decoration: none;
     }
 </style>
@@ -14,7 +14,7 @@
 @include('inc.messages')
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <h1 class="p-3">Communities</h1>
+            <h1 class="pt-4 pb-3 font-weight-bold">Communities</h1>
         </div>
         <hr class="light">
 
@@ -27,8 +27,8 @@
                 </div>
                 
                 <div class="col-md-6 order-2 mx-3 text-center p-3">
-                    <h5 class="text-center">About This Community</h5>
-                    <p class="text-center">{{$item->about}}</p>
+                    <h5 class="text-center font-weight-bold">About This Community</h5>
+                    <p class="text-center" style="font-size: 1.025rem">{{$item->about}}</p>
                 </div> 
             </div>
             <br>
