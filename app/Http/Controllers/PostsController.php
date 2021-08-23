@@ -66,7 +66,18 @@ class PostsController extends Controller
             $path = $request->file('post_image')->storeAs('public/cover_images/',$fileNameToStore);
         
             if ($request->input('category')==1) {
-                return back()->with('danger',$denied);
+                if(auth()->user()->role_id!=2){
+                    $post = new Post;
+                    $post->title = $request->input('title');
+                    $post->body = $request->input('body');
+                    $post->user_id = auth()->user()->id;
+                    $post->category_id = $request->input('category');
+                    $post->post_image = $fileNameToStore;
+                    $post->save();
+                    return redirect('categories')->with('success','Posts Created');
+                }else{
+                    return back()->with('danger',$denied);
+                }
             } else {
                 $post = new Post;
                 $post->title = $request->input('title');
@@ -81,7 +92,17 @@ class PostsController extends Controller
         else
         {
             if ($request->input('category')==1) {
-                return back()->with('danger',$denied);
+                if(auth()->user()->role_id!=2){
+                    $post = new Post;
+                    $post->title = $request->input('title');
+                    $post->body = $request->input('body');
+                    $post->user_id = auth()->user()->id;
+                    $post->category_id = $request->input('category');
+                    $post->save();
+                    return redirect('categories')->with('success','Posts Created');
+                }else{
+                    return back()->with('danger',$denied);
+                }
             } else {
             $post = new Post;
             $post->title = $request->input('title');
@@ -118,7 +139,7 @@ class PostsController extends Controller
     {
         $posts = Post::find($id);
         $cat = Category::pluck('category_name','id')->toArray();
-        $selectedID = 4;
+        $selectedID = $posts->category_id;
         //Check for Correct user
         if(auth()->user()->id !== $posts->user_id){
             return redirect('/posts')->with('danger','Unauthorized Page');
@@ -139,18 +160,60 @@ class PostsController extends Controller
         $this->validate($request,[
             'title'=>'required',
             'category'=>'required',
-            'body'=>'required'
+            'body'=>'required',
+            'post_image'=>'image|nullable|max:1999'
         ]);
-        if ($request->input('category')==1) {
-            return back()->with('danger','You are not allowed to enter a post in this community');
-        } else {
-        $posts = Post::find($id);
-        $posts->title=$request->input('title');
-        $posts->body=$request->input('body');
-        $posts->category_id = $request->input('category');
-        $posts->save();
-        return redirect('/categories')->with('success','Post Has Been Successfully Updated!');
-    }
+        if($request->hasFile('post_image')){
+            $fileNameWithExt = $request->file('post_image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext_type = $request->file('post_image')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$ext_type;
+            $path = $request->file('post_image')->storeAs('public/cover_images/',$fileNameToStore);
+            if ($request->input('category')==1) {
+                if(auth()->user()->role_id!=2){
+                    $post = Post::find($id);
+                    $post->title = $request->input('title');
+                    $post->body = $request->input('body');
+                    $post->user_id = auth()->user()->id;
+                    $post->category_id = $request->input('category');
+                    $post->post_image = $fileNameToStore;
+                    $post->save();
+                    return redirect('categories')->with('success','Posts Created');
+                }else{
+                    return back()->with('danger',$denied);
+                }
+            } else {
+            $posts = Post::find($id);
+            $posts->title=$request->input('title');
+            $posts->body=$request->input('body');
+            $posts->category_id = $request->input('category');
+            $post->post_image = $fileNameToStore;
+            $posts->save();
+            return redirect('/categories')->with('success','Post Has Been Successfully Updated!');
+            }
+        }else{
+            if ($request->input('category')==1) {
+                if(auth()->user()->role_id!=2){
+                    $post = Post::find($id);
+                    $post->title = $request->input('title');
+                    $post->body = $request->input('body');
+                    $post->user_id = auth()->user()->id;
+                    $post->category_id = $request->input('category');
+                    $post->save();
+                    return redirect('categories')->with('success','Posts Created');
+                }else{
+                    return back()->with('danger',$denied);
+                }
+            } else {
+            $post = Post::find($id);
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+            $post->user_id = auth()->user()->id;
+            $post->category_id = $request->input('category');
+            $post->save();
+            return redirect('/categories')->with('success','Post Created'); 
+            }
+        }
 }
 
     /**
