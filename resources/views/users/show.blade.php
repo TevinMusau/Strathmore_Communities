@@ -45,12 +45,12 @@
     <div class="container-fluid">
         @auth
                 @if (Auth::user()->id==$user->id)
-                    <h1 class="text-center p-4">
+                    <h1 class="text-center p-4 font-weight-bold">
                         Welcome {{$user->username}}
                     </h1>
 
                 @else
-                    <h1 class="text-center p-4">
+                    <h1 class="text-center p-4 font-weight-bold">
                         Welcome to {{$user->username}}'s profile
                     </h1>
 
@@ -61,7 +61,7 @@
             <div class="col-md-12">
                 @auth
                     @if (Auth::user()->id==$user->id)
-                        <h4 class="display 3 text-center">
+                        <h4 class="display 3 text-center font-weight-bold">
                             About Me
                         </h4>
                         <hr class="light">
@@ -69,7 +69,7 @@
                         {{-- @include('inc.messages') --}}
 
                     @else
-                        <h4 class="display 3 text-center">
+                        <h4 class="display 3 text-center font-weight-bold">
                             About {{$user->username}}
                         </h4>
                         <hr class="light">
@@ -81,125 +81,236 @@
             </div>
         </div>
 
-            <div class="row">
-                <div class="col-md-5 text-center order-1">
-                    <img  src="/storage/cover_images/{{$user->user_image}}" alt="Image Not Found" style="width: 60%; border-radius: 5%">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-sm-5 col-lg-5 col-xs-5 order-1 text-center mx-auto my-auto" style="border-right: 1px solid">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 text-center p-4">
+                        @if ($user->user_image == null)
+                            <img class="text-center rounded-circle img-fluid" src="/storage/users/default.png" style="width: 100%; border-radius: 50%; clip-path: circle()">
+                        @else
+                            <img class="text-center rounded-circle img-fluid" src="/storage/cover_images/{{$user->user_image}}" alt="Image Not Found" style="width: 100%; border-radius: 50%; clip-path: circle()">
+                        @endif
+                    </div>
+                    <br>
+                </div>
+
+                <input type="button" id="myDetails" class="btn btn-outline-secondary font-weight-bold text-center m-4" value="Click to View Personal Details" onclick="openDetails(); changeText();"/>
+
+                <div class="row justify-content-center">
+                    <div class="text-center" id="details" style = "display:none">
+                        <span class="text-center">
+                            <div class="text-right p-3" style="float: left">
+                                <span class="p-3">Username:</span> <br>
+                                <br />
+                                <span class="p-3">Name:</span><br>
+                                <br />
+                                <span class="p-3">Email:</span><br>
+                                <br />
+                                <span class="p-3">Admission Number:</span><br>
+                                <br />
+                                <span class="p-3">Joined on:</span><br>
+                                <br />
+                            </div>
+                            <div class="text-left p-3" style="float: right">
+                                <span class="p-3">{{$user->username}}</span><br>
+                                <br />
+                                <span class="p-3">
+                                    @if ($user->name==null)
+                                    Null
+                                    @else
+                                        {{$user->name}}
+                                    @endif
+                                </span><br>
+                                <br />                            
+                                <span class="p-3"> {{$user->email}}</span><br>                            
+                                <br />
+                                <span class="p-3"> {{$user->adm_no}}</span><br>                            
+                                <br />
+                                <span class="p-3">{{$user->created_at->format('Y-m-d')}}</span>
+                            </div>                            
+                            @if ($user->id == Auth::user()->id)
+                                <a href="/users/{{$user->id}}/edit" class="text-center font-weight-bold btn btn-outline-info mt-4" style="width: 40%;">Edit Personal Details</a>
+                            @else
+                            @endif
+                        </span>
+                    </div>
                 </div>
                 <br>
-
-                <div class="col order-2">
-                    <div>
-                        <span>
-                            <div class="text-right p-3" style="float: left">
-                                <span>UserName:</span>
-                                <br>
-                                <span>Email:</span>
-                                <br>
-                                <span>Admission Number:</span>
-                                <br>
-                                <span>Joined on:</span>
-                                <br>
-                            </div> 
-
-                            <div class="text-left p-3">
-                                <span>{{$user->username}}</span>
-                                <br>
-                                <span> {{$user->email}}</span>
-                                <br>
-                                <span> {{$user->adm_no}}</span>
-                                <br>
-                                <span>{{$user->created_at}}</span>
-                            </div>
-                        </span>                        
-                    </div>
-
-                    <div>
-                        <a href="/users/{{$user->id}}/edit" class="btn btn btn-outline-info" style="width: 40%">Edit</a>
-                    </div>
-                </div> 
-            </div>
-            <br><br>
-
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <!-- Tab links -->
-                    @if (Auth::user()->id==$user->id)
-                        <div class="tab btn-group d-flex mb-5">
-                            <button class="btn font-weight-bold" onclick="openCity(event, 'Posts')" id="tabBTN">
-                                My Posts
-                            </button>
-                            
-                            <button class="btn font-weight-bold" onclick="openCity(event, 'Community')" id="tabBTN">
-                                My Communities
-                            </button>
-
-                            <button class="btn font-weight-bold" onclick="openCity(event, 'ClassF')" id="tabBTN">
-                                Class Finder
-                            </button>
-                        </div>
-                    @else
-                        <div class="tab btn-group d-flex mb-5">
-                            <button class="btn font-weight-bold" onclick="openCity(event, 'Posts')" id="tabBTN">
-                                {{ $user->username }}'s Posts
-                            </button>
-
-                            <button class="btn font-weight-bold" onclick="openCity(event, 'Community')" id="tabBTN">
-                                {{ $user->username }}'s Communities
-                            </button>
-                            
-                            {{-- <button class="btn font-weight-bold" onclick="openCity(event, 'ClassF')" id="tabBTN">Class Finder</button> --}}
-                        </div>
-                    @endif
-                    
-                        <!-- Tab content -->
-                        <div id="Posts" class="tabcontent">
-                        {{-- <h3>My Posts</h3> --}}
-                            @if (count($posts)>0)
-                                @foreach ($posts as $item)
-                                    <div class="card text-center">
-                                        <div class="card-body">
-                                            <a href="/posts/{{$item->id}}"><h5 class="card-title">{{$item->title}}</h5></a>
-                                        </div>
-
-                                        <div class="card-footer text-muted">
-                                            {{$item->created_at}}
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                                @if (Auth::user()->id==$user->id)
-                                    <a href="/posts/create" class="btn btn-outline-success mb-5" style="width: 20%">
-                                        Add Post
-                                    </a>
-                                @else
-                                    
-                                @endif
-                                
-                            @else
-                                <h3 class="display 3">
-                                    No Posts Available
-                                </h3>
-
-                                <a href="/posts/create" class="btn btn-outline-success mb-5" style="width: 20%">
-                                    Add Post
-                                </a>
+                @if (Auth::user()->id==$user->id)
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            @if (Auth::user()->disabled==1)
+                                <div class="alert alert-danger">
+                                    This Account has been suspened.
+                                    <br>
+                                    Suspended Accounts are unable to:
+                                    <ul>
+                                        <li>Interact With Events</li>
+                                        <li>Interact With Communities</li>
+                                        <li>Interact With Posts</li>
+                                    </ul>
+                                    Please Contact an Administrator for more guidance.
+                                </div>
                             @endif
                         </div>
+                    </div>
+                @else
+                    
+                @endif
+            </div>
+        
+            <div class="col-7 order-2">
+                <br>
+                <div class="row justify-content-center">
+                    <div class="text-center">
+                        <!-- Tab links -->
+                        @if (Auth::user()->id==$user->id)
+                            <div class="row justify-content-center">
+                                <button class="btn font-weight-bold" onclick="openCity(event, 'Posts')" id="tabBTN">
+                                    My Posts
+                                </button>
+                                
+                                <button class="btn font-weight-bold" onclick="openCity(event, 'Community')" id="tabBTN">
+                                    My Communities
+                                </button>
 
-                        <div id="Community" class="tabcontent">
-                            {{-- <h3>My Communities</h3> --}}
-                            <h3 class="display 3 mb-5">
-                                No Community Joined
-                            </h3>
-                        </div>
+                                <button class="btn font-weight-bold" onclick="openCity(event, 'ClassF')" id="tabBTN">
+                                    My Events
+                                </button>
+                            </div>
+                        @else
+                            <div class="row justify-content-center">
+                                <button class="btn font-weight-bold" onclick="openCity(event, 'Posts')" id="tabBTN">
+                                    {{ $user->username }}'s Posts
+                                </button>
 
-                        <div id="ClassF" class="tabcontent">
-                            {{-- <h3>Class Finder</h3> --}}
-                            <h3 class="display 3 mb-5">
-                                No classes as of yet
-                            </h3>
-                        </div>
+                                <button class="btn font-weight-bold" onclick="openCity(event, 'Community')" id="tabBTN">
+                                    {{ $user->username }}'s Communities
+                                </button>
+                                
+                                {{-- <button class="tablinks" onclick="openCity(event, 'ClassF')" id="tabBTN">Class Finder</button> --}}
+                            </div>
+                        @endif
+                        
+                            <!-- Tab content -->
+                            <div id="Posts" class="tabcontent" style="display: none">
+                            {{-- <h3>My Posts</h3> --}}
+                            <br>
+                                @if (count($posts)>0)
+                                @if (Auth::user()->id==$user->id)
+                                <div class="row justify-content-center">
+                                    <a href="/posts/create" class="btn btn-outline-success mb-5" style="width: 50%; box-shadow: 2px 2px 2px #2E8B57">
+                                        Add Post
+                                    </a>
+                                </div>
+                                @endif
+                                    @foreach ($posts as $item)
+                                        <div class="card text-center p-2 mb-4">
+                                            <div class="card-body">
+                                                <a href="/posts/{{$item->id}}"><h5 class="card-title">{{$item->title}}</h5></a>
+                                            </div>
+
+                                            <div class="card-footer text-muted">
+                                                Created: {{$item->created_at->diffForHumans()}}
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    @if (Auth::user()->id!=$user->id)
+                                        <h3 class="p-2">{{$user->username}}'s has not created a post</h3>
+                                    @else
+                                    <a href="/posts/create" class="btn btn-outline-success mb-5" style="width: 50%; box-shadow: 2px 2px 2px #2E8B57">
+                                        Add Post
+                                    </a>
+                                    @endif
+                                @endif
+                            </div>
+
+                            <div id="Community" class="tabcontent" style="display: none">
+                                {{-- <h3>My Communities</h3> --}}
+                                <br>
+                                @if (count($user->categories)>0)
+                                    @foreach ($user->categories as $item)
+                                        <div class="card text-center">
+                                            <div class="card-body">
+                                                <a href="/posts/{{$item->id}}"><h5 class="card-title">{{$item->category_name}}</h5></a>
+                                                <p>{{$item->about}}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    @if (Auth::user()->id==$user->id)
+                                    <div class="row justify-content-center">
+                                        <p class="lead p-2">No Communities Joined</p>
+                                        <a href="/categories" class="btn btn-outline-success mb-5" style="width: 50%; box-shadow: 2px 2px 2px #2E8B57">
+                                            Find A Community
+                                        </a>
+                                    </div>
+                                    @else
+                                    <div class="row justify-content-center">
+                                        <span class="p-2">{{$user->username}}'s has not Joined a Community</span>
+                                    </div>
+                                    @endif
+                                @endif
+                            </div>
+
+                            <div id="ClassF" class="tabcontent m-4" style="display: none">
+                                @if (count($user->events) > 0)
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-3">Event Title</th>
+                                            <th class="p-3">About</th>
+                                            <th class="p-3">Location</th>
+                                            <th class="p-3">Event Date</th>
+                                            <th class="p-3"></th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        @foreach ($user->events as $item)
+                                        @if ($item->deadline < date('Y-m-d H:i:s'))
+                                            
+                                        @else
+                                            <tr>
+                                                <td class="p-3">{{$item->event_title}}</td>
+                                                <td class="p-3"><?php echo $item->about;?></td>
+                                                <td class="p-3">{{$item->location}}</td>
+                                                <td class="p-3">{{$item->deadline}}</td>
+                                                <td class="p-3"><a href="/events/{{$item->id}}" class="btn-link">View Event</a></td>
+                                            </tr>
+                                        @endif
+                                        
+                                        @endforeach
+                                    </tbody>
+                                    </table>
+                                    @else
+                                    <div class="row justify-content-center">
+                                        <h1 class="p-2">No events</h1>
+                                    </div>
+                                        
+                                    @endif
+                            </div>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
+    <script>
+        function openDetails()
+        {
+            var x = document.getElementById("details");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function changeText()
+        {
+            var elem = document.getElementById("myDetails");
+            if (elem.value=="Click to View Personal Details") elem.value = "Click to Close Personal Details";
+            else elem.value = "Click to View Personal Details";
+        }
+    </script>
 @endsection

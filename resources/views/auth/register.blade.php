@@ -5,10 +5,8 @@
 <head>
     <style>
         #Title{
-            padding-top: 100px;
-            margin-bottom: 30px;
-            font-weight:bold;
-            font-family: cursive;
+            font-weight:bold; 
+            font-family: 'Gill Sans' 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
         #cardHead{
             text-align: center;
@@ -21,13 +19,13 @@
 
 <div class="container">
 
-    <h3 id="Title" class="text-center">
+    <h3 id="Title" class="text-center font-weight-bold p-4">
         Strathmore Communities 
     </h3>
 
     <div class="row justify-content-center">
         <div class="col-md-7">
-            <div class="card" style="padding-bottom: 100px;">
+            <div class="card mb-5">
                 <div class="card-header" id="cardHead">
                     {{ __('Register') }}
                 </div>
@@ -40,7 +38,7 @@
                         @csrf
                         <div class="form-group row justify-content-center">
                             <div class="col-md-6">
-                                <p style="text-align: center"> Already have an account? <a href="{{ route('login') }}">Login</a> Here</p>
+                                <p style="text-align: center; font-size: 1.02rem"> Already have an account? <a href="{{ route('login') }}">Login</a> Here</p>
                                 <br>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address">
                                 @error('email')
@@ -97,7 +95,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-outline-success" style="width: 200px;">
+                                <button type="submit" class="btn btn-outline-success" style="width: 60%; box-shadow: 2px 2px 2px #2E8B57">
                                     {{ __('Register') }}
                                 </button>
                             </div>

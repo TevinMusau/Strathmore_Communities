@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container" >
+    <div class="container p-4" >
         @include('inc.messages')
         <div class="row justify-content-center">
             <div class="col-md-11 card text-center m-3">
@@ -17,71 +17,47 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <span class="p-2">
+                    <span class="p-2 font-weight-bold" style="font-size: 1.09rem;">
                         {{$posts->created_at->diffForHumans()}}
                     </span>  
                 </div>
                 @if ($posts->post_image)
                 <div class="row justify-content-center p-3">
-                    <img src="/storage/cover_images/{{$posts->post_image}}" class="img-fluid" alt="Responsive image" style="width: 30%">
+                    <img src="/storage/cover_images/{{$posts->post_image}}" class="img-fluid" alt="Responsive Image" style="width: 30%; box-shadow: 8px 8px 5px #ccc;
+                    -moz-border-radius:25px;
+                    -webkit-border-radius:25px;">
                 </div>
                 @else
                     
                 @endif
                 <div class="row justify-content-center">
                     <div class="col-md-7" >
-                        <p class="text-justify p-3"><?php echo $posts->body?></p>
+                        <p class="text-justify p-3" style="font-size: 1.1rem"><?php echo $posts->body?></p>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-10" >
-                        @if (count($posts->events)!=0)
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Event Title:</th>
-                                        <th>About:</th>
-                                        <th>Location:</th>
-                                        <th>Date:</th>
-                                        <th>View:</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($posts->events as $item)
-                                    <tr>
-                                        <td>{{$item->event_title}}</td>
-                                        <td><?php echo $item->about;?></td>
-                                        <td>{{$item->location}}</td>
-                                        <td>{{$item->deadline}}</td>
-                                        <td><a href="/events/{{$item->id}}" class="btn-link">View Event</a></td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            <h3>There are no events for this post</h3>
-                        @endif
-                    </div>
-                </div>
+                
                 @auth
-                <div class="row justify-content-start">
-                   <div class="justify-content-end m-1" style="padding-left: 1px">
+                <div class="row p-4 mb-2">
+                   <div class="col order-1" style="margin-left: 0.8rem">
                         {!!Form::open(['action'=>['LikesController@store'],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
                             {{Form::hidden('user_id',Auth::user()->id)}}
                             {{Form::hidden('posts_id',$posts->id)}}
-                            {{Form::submit('Upvote',['class'=>'btn btn-outline-success'])}}
+                            {{Form::submit('Upvote',['class'=>'btn btn-outline-success font-weight-bold', 'style'=>'box-shadow: 2px 2px 2px #2E8B57'])}}
                         {!!Form::close()!!}
-                   </div>
-                   <div class="justify-content-end m-1">
-                        {!!Form::open(['action'=>['LikesController@destroy',$posts->id],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
-                            {{Form::hidden('_method','DELETE')}}
-                            {{Form::submit('Downvote',['class'=>'btn btn-outline-danger'])}}
-                        {!!Form::close()!!}
-                   </div>
-                   <div class="justify-content-end m-1">
-                        <span class="p-2">
+
+                        <span class="p-2 font-weight-bold text-success">
                             {{$posts->likes->count()}} {{Str::plural('Upvote',$posts->likes->count())}}
                         </span>
+
+                   </div>
+                   <div class="col order-2">
+                        {!!Form::open(['action'=>['LikesController@destroy',$posts->id],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
+                            {{Form::hidden('_method','DELETE')}}
+                            {{Form::submit('Downvote',['class'=>'btn btn-outline-danger font-weight-bold', 'style'=>'box-shadow:  2px 2px 2px #CD5C5C'])}}
+                        {!!Form::close()!!}
+                   </div>
+                   <div class="justify-content-end m-1">
+                        
                    </div>
                 </div>
                 <div class="row justify-content-center">
@@ -90,16 +66,16 @@
                 @auth
                     @if (Auth::user()->id==$posts->user_id)
                     <div class="card-footer text-muted text-right">
-                        <div class="row" style="float: left">            
-                                <div class="justify-content-end m-1">
-                                    <a href="/posts/{{$posts->id}}/edit" class="btn btn-outline-primary" >Edit Post</a>
+                        <div class="row justify-content-end p-3">            
+                                <div class=" m-1">
+                                    <a href="/posts/{{$posts->id}}/edit" class="btn btn-outline-primary font-weight-bold" style="box-shadow:  2px 2px 2px #B0E0E6" >Edit Post</a>
                                 </div>
 
                                 <div class="justify-content-end m-1">
                                         {!!Form::open(['action'=>['PostsController@destroy',$posts->id],'method'=>'POST','class'=>'pull-right',
                                         'onsubmit'=>"return confirm('Are you sure you want to Delete This Post?');"])!!}
                                             {{Form::hidden('_method','DELETE')}}
-                                            {{Form::submit('Delete Post',['class'=>'btn btn-outline-danger'])}}
+                                            {{Form::submit('Delete Post',['class'=>'btn btn-outline-danger font-weight-bold', 'style'=>'box-shadow:  2px 2px 2px #CD5C5C'])}}
                                         {!!Form::close()!!}
                                 </div>
                         </div>
@@ -112,7 +88,7 @@
                     <div class="col-md-11 card text-center">
                         @if (Auth::user()->id!=$posts->user_id)
                             <div class="row justify-content-center">
-                                <button class="btn btn-danger" onclick="Openform();" style="width: 25%">Flag Post</button>
+                                <button class="font-weight-bold btn btn-outline-danger mt-3" onclick="Openform();" style="width: 25%; box-shadow:  2px 2px 2px #CD5C5C">Flag Post</button>
                             </div>
                             <br>
                             <div id="form1" style = "display:none">
@@ -121,19 +97,21 @@
                                     {!!Form::open(['action'=>['FlagsController@store'], 'method'=>'POST',
                                     'onsubmit'=>"return confirm('Do you really want to submit the form?');"])!!}
                                         <div class="form-group-row ">
-                                            <div class="row justify-content-center text-secondary font-weight-bold p-3 h4">
+                                            <div class="row justify-content-center font-weight-bold p-2 h4">
                                                 {{Form::label('flag_for','Flag For')}}
                                             </div>
-                                            {{Form::select('flag_for',[
+                                            <div class="row justify-content-center p-2" style="font-size: 1.02rem">
+                                                {{Form::select('flag_for',[
                                                 'Misleading'=>'Misleading',
                                                 'Sexual Content'=>'Sexual Content',
                                                 'Violent, Abusive or Hateful Content'=>'Violent, Abusive or Hateful Content',
                                                 'Harmful or Dangerous Acts'=>'Harmful or Dangerous Acts',
                                                 'Barassment or Bullying'=>'Harassment or Bullying'
                                                 ], 'Misleading',['class'=>'form-control'])}}
+                                            </div>
                                         </div>
-                                        <div class="form-group-row">
-                                            <div class="row justify-content-center text-secondary p-3 font-weight-bold h4">
+                                        <div class="form-group-row p-2">
+                                            <div class="row justify-content-center p-3 font-weight-bold h4">
                                             {{Form::label('extra','Please provide more infromation for your complaint.')}}
                                             </div>
                                             {{Form::textarea('extra','',['class'=>'ckeditor form-control','placeholder'=>'Body'])}}
@@ -143,14 +121,49 @@
                                             {{Form::hidden('user_id',Auth::user()->id)}}
                                             {{Form::hidden('post_id',$posts->id)}}
                                             <br>
-                                            {{Form::submit('Submit',['class'=>'btn btn-outline-success mb-5', 'style'=>'width: 30%;'])}}
+                                            {{Form::submit('Submit',['class'=>'btn btn-outline-success mb-5 font-weight-bold', 'style'=>'width: 30%; box-shadow: 2px 2px 2px #2E8B57'])}}
                                         </div>
                                     {!!Form::close()!!}
                                 </div>
                             </div>
                         @else
-                            <div class="row justify-content-center">
-                            <button class="btn btn-success" onclick="Openform1();" style="width: 25%">Add Event</button>
+                        <h4 class="text-center font-weight-bold p-4"> Post Events </h4>
+                        <div class="row justify-content-center p-4">
+                            <div class="col-md-10" >
+                                @if (count($posts->events)!=0)
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="p-3">Event Title</th>
+                                                <th class="p-3">About</th>
+                                                <th class="p-3">Location</th>
+                                                <th class="p-3">Date</th>
+                                                <th class="p-3">View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($posts->events as $item)
+                                            <tr>
+                                                <td class="p-3" style="font-size: 1.02rem">{{$item->event_title}}</td>
+                                                <td class="p-3" style="font-size: 1.02rem"><?php echo $item->about;?></td>
+                                                <td class="p-3" style="font-size: 1.02rem">{{$item->location}}</td>
+                                                <td class="p-3" style="font-size: 1.02rem">{{$item->deadline}}</td>
+                                                <td class="p-3" style="font-size: 1.02rem">
+                                                    <a href="/events/{{$item->id}}" class="btn-link">
+                                                        View Event
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <h3>There are no events for this post</h3>
+                                @endif
+                            </div>
+                        </div>
+                            <div class="row justify-content-center p-4">
+                            <button class="btn btn-outline-success font-weight-bold p-2" style="box-shadow: 2px 2px 2px #2E8B57" onclick="Openform1();" style="width: 30%">Add Event</button>
                             <br>
                             </div>
                             <div id="form2" style = "display:none">
@@ -186,7 +199,7 @@
                                             {{Form::hidden('user_id',Auth::user()->id)}}
                                             {{Form::hidden('post_id',$posts->id)}}
                                             <br>
-                                            {{Form::submit('Submit',['class'=>'btn btn-outline-success mb-5', 'style'=>'width: 30%;'])}}
+                                            {{Form::submit('Submit',['class'=>'btn btn-outline-success mb-5 font-weight-bold', 'style'=>'width: 30%; box-shadow: 2px 2px 2px #2E8B57'])}}
                                         </div>
                                     {!!Form::close()!!}
                                 </div>
@@ -195,20 +208,18 @@
                 </div>
             @endauth
         </div>
-<br><br><br>
-<br><br>
-        <div class="row justify-content-center">
+
+        <div class="row justify-content-center p-4">
             <div class="col-md-11 card m-3">
                 <div class="row justify-content-center">
                     <div class="p-4">
-                        
                         <h2 class="font-weight-bold">
                             Comments
                         </h2>
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-11 card m-3">
+                    <div class="col-md-11">
                         <div class="row justify-content-center">
                             <div class="p-4">
                                 <h2 class="font-weight-bold">
@@ -230,21 +241,22 @@
                             {{Form::hidden('posts_id',$posts->id)}}
 
                             <div class="row justify-content-center p-3">
-                                {{Form::submit('Submit Comment',['class'=>'btn btn-outline-success', 'style'=>'width: 20%'])}}
+                                {{Form::submit('Submit Comment',['class'=>'btn btn-outline-success font-weight-bold', 'style'=>'width: 20%; box-shadow: 2px 2px 2px #2E8B57'])}}
                             </div>
 
                             {!!Form::close()!!}
                             @endauth
                         </div> 
                     </div>
-                </div><br><br>
+                </div>
+                <br><br>
 
                 @if (count($comments)>0)
                     @foreach ($comments as $item)
                     <br>
-                        <div class="row justify-content-start m-2">
-                            <div class="card" style="width: 100%">
-                                <div class="card-body">
+                        <div class="row justify-content-center m-2">
+                            <div class="card" style="width: 85%">
+                                <div class="card-body" style="font-size: 1.02rem">
                                     <?php echo $item->comment; ?>
                                     <br>
                                 </div>
@@ -263,7 +275,7 @@
                                                     {!!Form::open(['action'=>['CommentsController@destroy',$item->id],'method'=>'POST','class'=>'pull-right',
                                                     'onsubmit'=>"return confirm('Confirm Comment Deletion?');"])!!}
                                                         {{Form::hidden('_method','DELETE')}}
-                                                        {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger'])}}
+                                                        {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger font-weight-bold', 'style'=>'box-shadow:  2px 2px 2px #CD5C5C'])}}
                                                     {!!Form::close()!!}
                                             @else
                                                 

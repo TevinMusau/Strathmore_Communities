@@ -88,15 +88,15 @@
 
 <div class="container-fluid">
 
-    <div class="row justify-content-center m-5">
-        <h3> Related Links </h3>
+    <div class="row justify-content-center p-5">
+        <h3 class="font-weight-bold"> Related Links </h3>
     </div>
     <hr class="light">
 
     <div class="justify-content-start p-3" id="titleBox1">
         <div>
             <h3>
-                <a href="https://strathmore.edu" title="Strathmore University Website" target="_blank">1. Strathmore Univeristy Website</a>
+                <a class="font-weight-bold p-3" href="https://strathmore.edu" title="Strathmore University Website" target="_blank" style="color:#A0522D">1. Strathmore Univeristy Website</a>
             </h3>
         </div>
     </div>
@@ -109,8 +109,9 @@
         </div>
 
         <div class="col order-2" id="relatedText1">
-            <p> 
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos tempore unde qui asperiores, omnis at nesciunt placeat, provident laborum suscipit, totam ratione ullam. Perferendis voluptatem eos sequi optio, laboriosam ex?
+            <p class="lead" style="font-size: 1.02rem"> 
+                Strathmore University is a chartered university based in Nairobi, Kenya. Strathmore College was started in 1961, as the first multi-racial, multi-religious advanced-level sixth form college offering science and arts subjects, by a group of professionals who formed a charitable educational trust. <br>
+                Click <a href="https://strathmore.edu">Here </a>to view it.
             </p>
         </div>
     </div>
@@ -118,7 +119,7 @@
     <div class="row justify-content-end mt-5 p-3" id="titleBox2">
         <div>
             <h3>
-              <a href="https://elearning.strathmore.edu" title="Strathmore University Website" target="_blank">2. Strathmore Univeristy E-learning</a>
+              <a class="font-weight-bold p-3" href="https://elearning.strathmore.edu" title="Strathmore University Website" target="_blank" style="color:#A0522D">2. Strathmore Univeristy E-learning</a>
             </h3>
         </div>
     </div>
@@ -130,8 +131,9 @@
             </a>
         </div>
         <div class="col order-1" id="relatedText2">
-            <p> 
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos tempore unde qui asperiores, omnis at nesciunt placeat, provident laborum suscipit, totam ratione ullam. Perferendis voluptatem eos sequi optio, laboriosam ex?
+            <p class="lead" style="font-size: 1.02rem"> 
+                Strathmore University's mission is to provide all-round quality education in an atmosphere of freedom and responsibility; excellence in teaching, research and scholarship; ethical and social development; and service to society. With their e-learning system, achieving this is a walk in the park<br>
+                Click <a href="https://elearning.strathmore.edu">Here </a>to view it.
             </p>
         </div>
     </div>
@@ -139,7 +141,7 @@
     <div class="row justify-content-start mt-5 p-3" id="titleBox3">
         <div>
             <h3>
-              <a href="https://su-sso.strathmore.edu/susams" title="Strathmore University Website" target="_blank">3. Strathmore Univeristy AMS</a>
+              <a class="font-weight-bold p-3" href="https://su-sso.strathmore.edu/susams" title="Strathmore University Website" target="_blank" style="color:#A0522D">3. Strathmore Univeristy AMS</a>
             </h3>
         </div>
     </div>
@@ -151,8 +153,9 @@
             </a>
         </div>
         <div class="col order-2" id="relatedText3">
-            <p> 
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos tempore unde qui asperiores, omnis at nesciunt placeat, provident laborum suscipit, totam ratione ullam. Perferendis voluptatem eos sequi optio, laboriosam ex?
+            <p class="lead" style="font-size: 1.02rem"> 
+                Strathmore Academic Module System (AMS) comes to the rescuse for Stratizens in ensuring that they get their course work marks and exam grades in a timely and organised manner. Powered by Apereo Central Authentication Service, it provides brilliant features for organisation, making items easily accessible.<br>
+                Click <a href="https://su-sso.strathmore.edu/cas-prd/login?service=https%3A%2F%2Fsu-sso.strathmore.edu%2Fsusams%2Fservlet%2Fedu%2Fstrathmore%2Fams%2Fsusams%2FInit.html"> Here </a>to view it.
             </p>
         </div>
     </div>

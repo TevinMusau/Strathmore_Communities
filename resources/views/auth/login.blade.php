@@ -5,10 +5,8 @@
 <head>
     <style>
         #Title{
-            padding-top: 1%;
-            margin-bottom: 30px; 
             font-weight:bold; 
-            font-family: cursive;
+            font-family: 'Gill Sans' 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
         #cardHead{
             text-align: center; 
@@ -21,13 +19,13 @@
 
 <div class="container">
 
-    <h3 class="text-center" id="Title">
+    <h3 class="text-center font-weight-bold p-4" id="Title">
         Strathmore Communities 
     </h3>
 
     <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div class="card" style="margin-bottom: 100px;">
+        <div class="col-md-6">
+            <div class="card mb-3">
                 <div class="card-header" id="cardHead">
                     Login
                 </div>
@@ -41,7 +39,7 @@
 
                         <div class="form-group row justify-content-center">                            
                             <div class="col-md-9">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror m-1 p-3" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -53,7 +51,7 @@
 
                         <div class="form-group row justify-content-center">
                             <div class="col-md-9">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter Password" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror m-1 p-3" placeholder="Enter Password" name="password" required autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -75,20 +73,22 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row">
                             <div class="col-md-8 offset-md-2 text-center">
-                                <button type="submit" class="btn btn-outline-success" style="width: 200px;">
+                                <button type="submit" class="btn btn-outline-success m-3 font-weight-bold" style="width: 50%; box-shadow: 2px 2px 2px #2E8B57">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link" href="{{ route('password.request') }}" style="font-size: 1.02rem">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
                                 <br><br>
                                 
-                                <p style="text-align: center"> New around here? <a href="{{ route('register') }}">Register</a> Here</p>
+                                <p style="text-align: center; font-size: 1.02rem"> New around here? <a href="{{ route('register') }}">Register</a> Here</p>
+                                <br>
+                                <p style="text-align: center"><a href="/admin/login" class="btn btn-link">Admin Side</a></p>
                             </div>
                         </div>
                     </form>

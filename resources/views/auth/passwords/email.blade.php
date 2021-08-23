@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        #Title{
+            font-weight:bold; 
+            font-family: 'Gill Sans' 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
 <div class="container">
 
-    <h3 class="text-center" style="margin-top: 100px; margin-bottom: 30px; font-weight:bold; font-family: cursive">
+    <h3 id="Title" class="text-center text-center font-weight-bold p-4">
         Strathmore Communities 
     </h3>
 
@@ -27,7 +33,7 @@
 
                         <div class="form-group row justify-content-center">
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror p-3" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -40,8 +46,8 @@
                         <br>
 
                         <div class="form-group row mb-0 justify-content-center">
-                            <div class="col-md-6 offset-md-1">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-outline-success p-2" style="width: 90%; box-shadow: 2px 2px 2px #2E8B57">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
