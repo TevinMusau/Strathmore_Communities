@@ -9,19 +9,15 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Comment extends Model
+class Reply extends Model
 {
+    use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    use HasFactory;
-    public function post(){
-        return $this->belongsTo(Post::class);
+    public function comment(){
+        return $this->belongsTo(Comment::class);
     }
     public function user(){
         return $this->belongsTo(User::class);
-    }
-    public function replies(){
-        return $this->hasMany(Reply::class);
     }
 }

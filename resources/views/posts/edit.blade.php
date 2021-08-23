@@ -28,6 +28,13 @@
                     {{Form::textarea('body',$posts->body,['class'=>'ckeditor form-control p-4 m-3','placeholder'=>'Body', 'style'=>'font-size: 1.02rem;'])}}
             </div>
 
+            <div class="form-group-row">
+                <br>
+                <span class="px-4"> Select a Post Image (Optional)</span>
+                <br>
+                {{Form::file('post_image')}}
+            </div>
+
             <div class="row justify-content-center">
                 {{Form::hidden('_method','PUT')}}
                 {{Form::submit('Save This Edit',['class'=>'btn btn-outline-success m-4 p-2','style'=>'width: 35%; box-shadow: 2px 2px 2px #2E8B57' ])}}

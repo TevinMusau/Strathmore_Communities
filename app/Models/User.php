@@ -80,4 +80,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
+    public function replies(){
+        return $this->hasMany(Reply::class);
+    }
 }

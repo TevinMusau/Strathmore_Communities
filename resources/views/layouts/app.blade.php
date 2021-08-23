@@ -12,6 +12,8 @@
         <!-- Scripts -->
         <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -31,7 +33,16 @@
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 font-weight: bold;
                 cursor: pointer;
+
                 color:#B0C4DE;
+                font-size: 25px;
+                padding: 15px;
+            }
+            #titleUrl{
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-weight: bold;
+                cursor: pointer;
+                color:#AFEEEE;
                 font-size: 25px;
                 padding: 15px;
             }
