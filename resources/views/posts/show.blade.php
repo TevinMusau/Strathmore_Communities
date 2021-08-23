@@ -269,7 +269,9 @@
                                     <br>
                                 </div>
 
+
                                 <div class="card-footer text-muted  p-3">
+
                                     <p>
                                         <span>By: <a href="/users/{{$item->user->id}}">{{$item->user->username}}</a></span><br>
                                         <span class="font-italic">Created: </span>{{$item->created_at->diffForHumans()}}
