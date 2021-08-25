@@ -65,17 +65,21 @@ class PostsController extends Controller
             $fileNameToStore = $fileName.'_'.time().'.'.$ext_type;
             $path = $request->file('post_image')->storeAs('public/cover_images/',$fileNameToStore);
         
-            if ($request->input('category')==1) {
-                if(auth()->user()->role_id!=2){
+            if ($request->input('category')==1) 
+            {
+                if(auth()->user()->role_id != 2)
+                {
                     $post = new Post;
                     $post->title = $request->input('title');
                     $post->body = $request->input('body');
                     $post->user_id = auth()->user()->id;
                     $post->category_id = $request->input('category');
-                    $post->post_image = $fileNameToStore;
+                    $post->post_image = Input::file($fileNameToStore);
                     $post->save();
                     return redirect('categories')->with('success','Posts Created');
-                }else{
+                }
+                else
+                {
                     return back()->with('danger',$denied);
                 }
             } else {
@@ -187,7 +191,7 @@ class PostsController extends Controller
             $posts->title=$request->input('title');
             $posts->body=$request->input('body');
             $posts->category_id = $request->input('category');
-            $post->post_image = $fileNameToStore;
+            $posts->post_image = $fileNameToStore;
             $posts->save();
             return redirect('/categories')->with('success','Post Has Been Successfully Updated!');
             }

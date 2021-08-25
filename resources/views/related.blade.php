@@ -110,8 +110,9 @@
 
         <div class="col order-2" id="relatedText1">
             <p class="lead" style="font-size: 1.02rem"> 
-                Strathmore University is a chartered university based in Nairobi, Kenya. Strathmore College was started in 1961, as the first multi-racial, multi-religious advanced-level sixth form college offering science and arts subjects, by a group of professionals who formed a charitable educational trust. <br>
-                Click <a href="https://strathmore.edu">Here </a>to view it.
+                Strathmore University is a chartered university based in Nairobi, Kenya. Strathmore College was started in 1961, as the first multi-racial, multi-religious advanced-level sixth form college offering science and arts subjects, by a group of professionals who formed a charitable educational trust. 
+                <br><br>
+                Click <a href="https://strathmore.edu" target="_blank">Here </a>to view it.
             </p>
         </div>
     </div>
@@ -132,8 +133,9 @@
         </div>
         <div class="col order-1" id="relatedText2">
             <p class="lead" style="font-size: 1.02rem"> 
-                Strathmore University's mission is to provide all-round quality education in an atmosphere of freedom and responsibility; excellence in teaching, research and scholarship; ethical and social development; and service to society. With their e-learning system, achieving this is a walk in the park<br>
-                Click <a href="https://elearning.strathmore.edu">Here </a>to view it.
+                Strathmore University's mission is to provide all-round quality education in an atmosphere of freedom and responsibility; excellence in teaching, research and scholarship; ethical and social development; and service to society. With their e-learning system, achieving this is a walk in the park.
+                <br><br>
+                Click <a href="https://elearning.strathmore.edu" target="_blank">Here </a>to view it.
             </p>
         </div>
     </div>
@@ -154,8 +156,9 @@
         </div>
         <div class="col order-2" id="relatedText3">
             <p class="lead" style="font-size: 1.02rem"> 
-                Strathmore Academic Module System (AMS) comes to the rescuse for Stratizens in ensuring that they get their course work marks and exam grades in a timely and organised manner. Powered by Apereo Central Authentication Service, it provides brilliant features for organisation, making items easily accessible.<br>
-                Click <a href="https://su-sso.strathmore.edu/cas-prd/login?service=https%3A%2F%2Fsu-sso.strathmore.edu%2Fsusams%2Fservlet%2Fedu%2Fstrathmore%2Fams%2Fsusams%2FInit.html"> Here </a>to view it.
+                Strathmore Academic Module System (AMS) comes to the rescuse for Stratizens in ensuring that they get their course work marks and exam grades in a timely and organised manner. Powered by Apereo Central Authentication Service, it provides brilliant features for organisation, making items easily accessible.
+                <br><br>
+                Click <a href="https://su-sso.strathmore.edu/cas-prd/login?service=https%3A%2F%2Fsu-sso.strathmore.edu%2Fsusams%2Fservlet%2Fedu%2Fstrathmore%2Fams%2Fsusams%2FInit.html" target="_blank"> Here </a>to view it.
             </p>
         </div>
     </div>

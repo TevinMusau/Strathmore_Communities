@@ -1,5 +1,18 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    #userName{
+        color: #CD853F;
+    }
+    #userName:hover{
+        text-decoration: none;
+        color: #D2B48C;
+    }
+    #userName:active{
+        color: #00FF7F;
+        text-shadow: 0.5px 0.5px 0.5px black;
+    }
+</style>
     <div class="container p-4" >
         @include('inc.messages')
         <div class="row justify-content-center">
@@ -22,23 +35,47 @@
                 </div>
                 <div class="row justify-content-center p-1">
                     <div class="col-5 text-center">
-                        <h5 class="">By <a href="/users/{{$posts->user_id}}">{{$posts->user->username}}</a></h5>
+                        <h5 class="font-weight-bold">By <a id="userName" href="/users/{{$posts->user_id}}">{{$posts->user->username}}</a></h5>
                     </div>
                 </div>
                 <div class="row justify-content-center">
+                    <div class="btn-group dropright">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle font-weight-bold mt-4 mb-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Time Stamps
+                        </button>
+                        
+                        <div class="dropdown-menu">                                   
+                            <ul style="list-style: circle">
+                                <span class="font-weight-bold" style="font-size: 1.02rem">Created:</span>
+                                <li class="m-2" style="font-size: 1.01rem">
+                                    {{$posts->created_at->diffForHumans()}}
+                                </li>
 
-                    <details>
-                        <summary>Time Stamps:</summary>
-                        <summary>Created:</summary>
+                                <span class="font-weight-bold" style="font-size: 1.02rem">Updated:</span>
+                                @if ($posts->updated_at == null)
+                                    <li class="m-2" style="font-size: 1.01rem">
+                                        This post had not been updated
+                                    </li>
+                                @else
+                                    <li class="m-2" style="font-size: 1.01rem">
+                                        {{$posts->updated_at->diffForHumans()}}
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                    {{-- <summary>Time Stamps:</summary>
+                    <summary>Created:</summary>
 
-                        {{$posts->created_at->diffForHumans()}}
-                        <summary>Updated:</summary>
-                        @if ($posts->updated_at == null)
-                            <span class="p-2">This post had not been updated.</span>
-                        @else
-                            {{$posts->updated_at->diffForHumans()}}
-                        @endif
-                    </details><br>
+                    {{$posts->created_at->diffForHumans()}}
+                    <summary>Updated:</summary>
+                    @if ($posts->updated_at == null)
+                        <span class="p-2">This post had not been updated.</span>
+                    @else
+                        {{$posts->updated_at->diffForHumans()}}
+                    @endif --}}
+                    {{-- </details> --}}
+                    
                     {{-- <span class="p-2">
                         {{$posts->created_at->diffForHumans()}}
                     </span>   --}}
@@ -171,7 +208,7 @@
                                                 <td class="p-3" style="font-size: 1.02rem">{{$item->location}}</td>
                                                 <td class="p-3" style="font-size: 1.02rem">{{$item->deadline}}</td>
                                                 <td class="p-3" style="font-size: 1.02rem">
-                                                    <a href="/events/{{$item->id}}" class="btn-link">
+                                                    <a href="/events/{{$item->id}}" id="userName" class="btn-link font-weight-bold">
                                                         View Event
                                                     </a>
                                                 </td>
@@ -289,19 +326,27 @@
                                 <div class="card-footer text-muted  p-3">
 
                                     <p>
-                                        <span>By: <a href="/users/{{$item->user->id}}">{{$item->user->username}}</a></span><br>
-                                        <span class="font-italic">Created: </span>{{$item->created_at->diffForHumans()}}
+                                        <span class="font-weight-bold font-italic">By: 
+                                            <a id="userName" href="/users/{{$item->user_id}}">
+                                                @if(!empty($item->user))
+                                                <span class="font-italic font-weight-bold">{{ $item->user->username }}</span>
+                                                @endif
+                                            </a>
+                                        </span>
+                                        <br>
+                                        <span class="font-italic font-weight-bold">Created: </span>
+                                        <span class="font-italic font-weight-bold">{{$item->created_at->diffForHumans()}}</span>
                                     </p>
                                     @auth
                                         <div class="float-left">
-                                            <button class="btn btn-success" data-id="{{$item->id}}" onclick="show({{$item->id}});">Reply</button>
+                                            <button class="btn btn-outline-success font-weight-bold" style="box-shadow: 2px 2px 2px #2E8B57" data-id="{{$item->id}}" onclick="show({{$item->id}});">Reply</button>
                                         </div>    
                                         <div class="float-right">
                                                 @if (Auth::user()->id==$item->user_id)
                                                         {!!Form::open(['action'=>['CommentsController@destroy',$item->id],'method'=>'POST','class'=>'pull-right',
                                                         'onsubmit'=>"return confirm('Confirm Comment Deletion?');"])!!}
                                                             {{Form::hidden('_method','DELETE')}}
-                                                            {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger'])}}
+                                                            {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger font-weight-bold', 'style'=>'box-shadow:  2px 2px 2px #CD5C5C'])}}
                                                         {!!Form::close()!!}
                                                 @else
                                                     
@@ -320,7 +365,7 @@
                                                 {{Form::hidden('comment_id',$item->id)}}
 
 
-                                    <div class="float-right">
+                                    {{-- <div class="float-right">
                                         @auth
                                             @if (Auth::user()->id==$item->user_id)
                                                     {!!Form::open(['action'=>['CommentsController@destroy',$item->id],'method'=>'POST','class'=>'pull-right',
@@ -332,17 +377,17 @@
                                                 
                                             @endif
                                         @endauth
-                                    </div>
+                                    </div> --}}
 
                                                 <div class="row justify-content-center p-3">
-                                                    {{Form::submit('Submit Comment',['class'=>'btn btn-outline-success', 'style'=>'width: 20%'])}}
+                                                    {{Form::submit('Submit Reply',['class'=>'btn btn-outline-success font-weight-bold', 'style'=>'width: 20%; box-shadow: 2px 2px 2px #2E8B57'])}}
                                                 </div>
                                             {!!Form::close()!!}
                                         </div>
                                         <br><br>
                                         <div class="m-2">
                                             <div class="float-left">
-                                                <button class="btn btn-link" data-id="{{$item->id}}" onclick="showR({{$item->id}});">Show replies.</button>
+                                                <button class="btn btn-outline-info font-weight-bold mt-2" style="box-shadow:  2px 2px 2px #B0E0E6" data-id="{{$item->id}}" onclick="showR({{$item->id}});">Show replies.</button>
                                             </div>
                                             <br><br>
                                             <div id="Creply-{{$item->id}}" class="row justify-content-start" style="display: none">
@@ -371,7 +416,7 @@
                                                         </div>
                                                     @endforeach
                                                 @else
-                                                    <span class="m-2">This comment has no replies.</span>
+                                                    <p class="m-3 text-center lead font-weight-bold" style="font-size: 1.02rem">This comment has no replies.</p>
                                                 @endif
                                             </div>
                                          </div>
