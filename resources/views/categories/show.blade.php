@@ -12,7 +12,8 @@
         text-decoration: none;
     }
     #postTitle:active{
-        
+        color: #00FF7F;
+        text-shadow: 0.5px 0.5px 0.5px black;
     }
 </style>
 
@@ -47,7 +48,14 @@
                     <div class="card rounded m-2" style="width: 100%;">
                         <div class="card-header">
                             @if ($item->post_image)
-                                <span class="p-4"><img src="{{ asset('/storage/cover_images/'.$item->post_image) }}" alt="Post Image" style="width: 10%"></span>
+                                <span class="p-4">
+                                    <a href="/posts/{{$item->id}}">
+                                        <img title="{{ $item->title }}" src="{{ asset('/storage/cover_images/'.$item->post_image) }}" alt="Post Image" 
+                                            style="width: 10%; box-shadow: 8px 8px 5px #ccc;
+                                                -moz-border-radius:15px;
+                                                -webkit-border-radius:15px; cursor: pointer;">
+                                    </a>
+                                </span>
                                 <a id="postTitle" href="/posts/{{$item->id}}">
                                     <span class="card-title p-4 font-weight-bold" id="postTitle">{{$item->title}}</span>
                                 </a>

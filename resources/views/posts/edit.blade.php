@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('content')
+@include('inc.messages')
    <div class="container-fluid">
         <div class="row justify-content-center">
             <h2 class="p-4 font-weight-bold">Edit Post</h2>
         </div>
 
        <div class="row justify-content-center">
-            {!!Form::open(['action'=>['PostsController@update',$posts->id],'method'=>'POST','onsubmit'=>"return confirm('Are you sure you would like to Edit This Post?');"])!!}
+            {!!Form::open(['action'=>['PostsController@update',$posts->id], 'enctype'=>"multipart/form-data", 'method'=>'POST','onsubmit'=>"return confirm('Are you sure you would like to Edit This Post?');"])!!}
             <div class="form-group-row ">
                 <div class="row justify-content-center font-weight-bold" style="font-size: 1.1rem">
                     {{Form::label('title','Title')}}
@@ -37,7 +38,7 @@
 
             <div class="row justify-content-center">
                 {{Form::hidden('_method','PUT')}}
-                {{Form::submit('Save This Edit',['class'=>'btn btn-outline-success m-4 p-2','style'=>'width: 35%; box-shadow: 2px 2px 2px #2E8B57' ])}}
+                {{Form::submit('Save This Edit',['class'=>'btn btn-outline-success font-weight-bold m-4 p-2','style'=>'width: 35%; box-shadow: 2px 2px 2px #2E8B57' ])}}
             </div>
             
             {!!Form::close()!!}  

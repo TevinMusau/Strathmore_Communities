@@ -151,6 +151,12 @@
             .fa-facebook:hover, .fa-twitter:hover, .fa-instagram:hover, .fa-linkedin:hover, .fa-youtube:hover{
                 color: #d5d5d5;
             }
+            @media all and (min-width: 992px) {
+                .navbar .nav-item .dropdown-menu{ display: none; }
+                .navbar .nav-item:hover .nav-link{   }
+                .navbar .nav-item:hover .dropdown-menu{ display: block; }
+                .navbar .nav-item .dropdown-menu{ margin-top:0; }
+            }
         </style>
     </head>
     
