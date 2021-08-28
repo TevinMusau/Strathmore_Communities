@@ -52,6 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         //Input Validation
+        //Ensure emails accepted are Strathmore Emails
         return Validator::make($data, [
             'adm_no' => ['required', 'integer', 'min:5', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new IsAllowedDomain],

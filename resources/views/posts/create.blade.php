@@ -41,7 +41,7 @@
                 <div class="row justify-content-center text-secondary font-weight-bold p-3 h4">
                     {{Form::hidden('user_id')}}
                     <br>
-                    {{Form::submit('Submit',['class'=>'btn btn-outline-success mb-5', 'style'=>'width: 30%;'])}}
+                    {{Form::submit('Submit',['class'=>'btn btn-outline-success font-weight-bold mb-5', 'style'=>'width: 30%; box-shadow: 2px 2px 2px #2E8B57'])}}
                 </div>
             {!!Form::close()!!}
         </div>
