@@ -157,7 +157,7 @@
         <hr class="m-4">     
         
         <!-- Cards -->
-        <div class="container-fluid" style="background-image: url({{ asset('images/student2.jpg') }}); padding: 5rem;" >
+        <div class="container-fluid" style="background-image: url({{ asset('images/community2.jpg') }}); background-size: cover; background-repeat: no-repeat; padding: 5rem;" >
             <div class="row">
                 <div class="col-sm-12">
                     <div id="inam" class="carousel slide" data-ride="carousel">

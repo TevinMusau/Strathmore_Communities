@@ -14,6 +14,18 @@
             font-size:18px; 
             background-color: #d5d5d5;
         }
+        #subLink{
+        color: #CD853F;
+        font-weight: bold;
+        }
+        #subLink:hover{
+            text-decoration: none;
+            color: #D2B48C;
+        }
+        #subLink:active{
+            color: #00FF7F;
+            text-shadow: 0.5px 0.5px 0.5px black;
+        }
     </style>
 </head>
 
@@ -25,7 +37,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card mb-3">
+            <div class="card mb-3" style="background-image: url({{ asset('images/patterns/wall4.png') }}); border: none;">
                 <div class="card-header" id="cardHead">
                     Login
                 </div>
@@ -80,15 +92,15 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}" style="font-size: 1.02rem">
+                                    <a id="subLink" class="btn btn-link" href="{{ route('password.request') }}" style="font-size: 1.02rem">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
                                 <br><br>
                                 
-                                <p style="text-align: center; font-size: 1.02rem"> New around here? <a href="{{ route('register') }}">Register</a> Here</p>
+                                <p style="text-align: center; font-size: 1.02rem"> New around here? <a id="subLink" href="{{ route('register') }}">Register</a> Here</p>
                                 <br>
-                                <p style="text-align: center"><a href="/admin/login" class="btn btn-link">Admin Side</a></p>
+                                <p style="text-align: center"><a id="subLink" href="/admin/login" class="btn btn-link" style="font-size: 1.02rem">Admin Side</a></p>
                             </div>
                         </div>
                     </form>

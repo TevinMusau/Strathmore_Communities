@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container p-4">
+        @include('inc.messages')
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <h2 class="p-4 text-center font-weight-bold">
                     Edit My Details
                 </h2>
-                <div class="card">
+                <div class="card" style="background-image: url({{ asset('images/patterns/wall4.png') }}); border: none;">
                     <div class="card-header text-center font-weight-bold">
                         Edit Personal Details
                     </div>
@@ -16,7 +17,7 @@
                             <div class="col-md-12 text-center">
                                 <div class="form-group row justify-content-center">
                                     <div class="col-md-9 p-2">
-                                        {{Form::text('username',$users->username,['class'=>'form-control','placeholder'=>'User name'])}}
+                                        {{Form::text('username',$users->username,['class'=>'form-control','placeholder'=>'Username'])}}
                                     </div>
                                 </div>
 

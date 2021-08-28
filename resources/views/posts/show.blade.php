@@ -316,8 +316,7 @@
 
                         <div class="row justify-content-start m-2">
                             <div class="card" style="width: 100%">
-                                <div class="card-body" style="height: 75%">
-
+                                <div class="card-body" style="height: 75%; font-size: 1.02rem;">
                                     <?php echo $item->comment; ?>
                                     <br>
                                 </div>
@@ -393,19 +392,20 @@
                                             <div id="Creply-{{$item->id}}" class="row justify-content-start" style="display: none">
                                                 @if (count($item->replies)>0)
                                                     @foreach ($item->replies as $item)
-                                                        <div class="card">
-                                                            <div class="card-body"><?php echo $item->reply; ?></div>
+                                                        <div class="card m-4">
+                                                            <div class="card-body text-dark" style="font-size: 1.02rem;"><?php echo $item->reply; ?></div>
                                                             <div class="card-footer">
                                                                 <p>
-                                                                    <span>By: <a href="/users/{{$item->id}}">{{$item->user->username}}</a></span><br>
-                                                                    <span class="font-italic">Created: </span>{{$item->created_at->diffForHumans()}}
+                                                                    <span class="font-italic font-weight-bold">By: <a id="userName" href="/users/{{$item->id}}">{{$item->user->username}}</a></span><br>
+                                                                    <span class="font-italic font-weight-bold">Created: </span>
+                                                                    <span class="font-italic font-weight-bold">{{$item->created_at->diffForHumans()}}</span>
                                                                 </p>
                                                                 <div class="float-right">
                                                                     @if (Auth::user()->id==$item->user_id)
                                                                             {!!Form::open(['action'=>['ReplyController@destroy',$item->id],'method'=>'POST','class'=>'pull-right',
                                                                             'onsubmit'=>"return confirm('Confirm Reply Deletion?');"])!!}
                                                                                 {{Form::hidden('_method','DELETE')}}
-                                                                                {{Form::submit('Delete Comment',['class'=>'btn btn-outline-danger'])}}
+                                                                                {{Form::submit('Delete Reply',['class'=>'btn btn-outline-danger font-weight-bold', 'style'=>'box-shadow:  2px 2px 2px #CD5C5C'])}}
                                                                             {!!Form::close()!!}
                                                                     @else
                                                                         

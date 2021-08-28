@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Like;
+use App\Rules\IsAllowedDomain;
 class UsersController extends Controller
 {
     public function __construct()
@@ -95,11 +96,12 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userId = isset($user) ? $user->id : null;
         $this->validate($request,[
-            'username'=>'required',
-            'name'=>'required',
-            'adm_no'=>'required',
-            'email'=>'required',
+            'username'=>'nullable|sometimes|unique:users',
+            'name'=>'nullable|sometimes',
+            'adm_no'=>'nullable|sometimes|unique:users',
+            'email'=> 'nullable', new IsAllowedDomain,
             'user_image'=>'image|nullable|max:1999'
         ]);
         if($request->hasFile('user_image')){

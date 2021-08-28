@@ -14,6 +14,30 @@
             font-size:18px;
             background-color: #d5d5d5
         }
+        #subLink{
+        color: #CD853F;
+        font-weight: bold;
+        }
+        #subLink:hover{
+            text-decoration: none;
+            color: #D2B48C;
+        }
+        #subLink:active{
+            color: #00FF7F;
+            text-shadow: 0.5px 0.5px 0.5px black;
+        }
+        /* Remove Arrows in number input type */
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
     </style>
 </head>
 
@@ -25,7 +49,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-7">
-            <div class="card mb-5">
+            <div class="card mb-5" style="background-image: url({{ asset('images/patterns/wall4.png') }}); border: none;">
                 <div class="card-header" id="cardHead">
                     {{ __('Register') }}
                 </div>
@@ -38,7 +62,7 @@
                         @csrf
                         <div class="form-group row justify-content-center">
                             <div class="col-md-6">
-                                <p style="text-align: center; font-size: 1.02rem"> Already have an account? <a href="{{ route('login') }}">Login</a> Here</p>
+                                <p style="text-align: center; font-size: 1.02rem"> Already have an account? <a id="subLink" href="{{ route('login') }}">Login</a> Here</p>
                                 <br>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address">
                                 @error('email')

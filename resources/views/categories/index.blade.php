@@ -6,7 +6,7 @@
         text-decoration: none;
     }
     a:hover{
-        color: #B8860B;
+        color: #D2B48C;
         text-decoration: none;
     }
 </style>

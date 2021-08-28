@@ -94,48 +94,44 @@
                     <br>
                 </div>
 
-                <input type="button" id="myDetails" class="btn btn-outline-secondary font-weight-bold text-center m-4" value="Click to View Personal Details" onclick="openDetails(); changeText();"/>
-
-                
-                    <div class="" id="details" style = "display:none; width: 100%">
-                        
-                            <div class="text-right" style="float:left">
-                                <span class="p-2">Username:</span> <br>
-                                <br />
-                                <span class="p-2">Name:</span><br>
-                                <br />
-                                <span class="p-2">Email:</span><br>
-                                <br />
-                                <span class="p-2">Admission Number:</span><br>
-                                <br />
-                                <span class="p-2">Joined on:</span><br>
-                                
-                            </div>
-                            <div class="text-left" style="float: none">
-                                <span class="p-2">{{$user->username}}</span><br>
-                                <br />
-                                <span class="p-2">
-                                    @if ($user->name==null)
-                                    Null
-                                    @else
-                                        {{$user->name}}
-                                    @endif
-                                </span><br>
-                                <br />                
-                                <span class="p-2"> {{$user->email}}</span><br>                            
-                                <br />
-                                <span class="p-2"> {{$user->adm_no}}</span><br>                            
-                                <br />
-                                <span class="p-2">{{$user->created_at->format('Y-m-d')}}</span>
-                            </div>                            
-                            @if ($user->id == Auth::user()->id)
-                                <a href="/users/{{$user->id}}/edit" class="text-center font-weight-bold btn btn-outline-info mt-4" style="width: 40%;">Edit Personal Details</a>
-                            @else
-                            @endif
-                        
-                    </div>
-                
-                <br>
+                <input type="button" id="myDetails" class="btn btn-outline-secondary font-weight-bold text-center m-4" value="Click to View Personal Details" onclick="openDetails(); changeText();"/>                
+                    <div class="p-1" id="details" style = "display:none; width: 100%">
+                        <div class="text-right" style="float:left">
+                            <span class="p-2">Username:</span> <br>
+                            <br />
+                            <span class="p-2">Name:</span><br>
+                            <br />
+                            <span class="p-2">Email:</span><br>
+                            <br />
+                            <span class="p-2">Admission Number:</span><br>
+                            <br />
+                            <span class="p-2">Joined on:</span><br>
+                            
+                        </div>
+                        <div class="text-left" style="float: none">
+                            <span class="p-2">{{$user->username}}</span><br>
+                            <br />
+                            <span class="p-2">
+                                @if ($user->name==null)
+                                Null
+                                @else
+                                    {{$user->name}}
+                                @endif
+                            </span><br>
+                            <br />                
+                            <span class="p-2"> {{$user->email}}</span><br>                            
+                            <br />
+                            <span class="p-2"> {{$user->adm_no}}</span><br>                            
+                            <br />
+                            <span class="p-2">{{$user->created_at->format('Y-m-d')}}</span>
+                        </div>                            
+                        @if ($user->id == Auth::user()->id)
+                            <a href="/users/{{$user->id}}/edit" class="text-center font-weight-bold btn btn-outline-info mt-4" style="width: 40%;">Edit Personal Details</a>
+                        @else
+                        @endif
+                    </div>                
+                    <br>
+                    
                 @if (Auth::user()->id==$user->id)
                     <div class="container">
                         <div class="row justify-content-center">
@@ -219,6 +215,7 @@
                                     @if (Auth::user()->id!=$user->id)
                                         <h3 class="p-2">{{$user->username}}'s has not created a post</h3>
                                     @else
+                                    <p class="lead p-2 font-weight-bold">No Posts Created</p>
                                     <a href="/posts/create" class="font-weight-bold btn btn-outline-success mb-5" style="width: 50%; box-shadow: 2px 2px 2px #2E8B57">
                                         Add Post
                                     </a>
@@ -241,8 +238,8 @@
                                 @else
                                     @if (Auth::user()->id==$user->id)
                                     <div class="row justify-content-center">
-                                        <p class="lead p-2">No Communities Joined</p>
-                                        <a href="/categories" class="btn btn-outline-success mb-5" style="width: 50%; box-shadow: 2px 2px 2px #2E8B57">
+                                        <p class="lead p-2 font-weight-bold">No Communities Joined</p>
+                                        <a href="/categories" class="btn btn-outline-success mb-5 font-weight-bold" style="width: 50%; box-shadow: 2px 2px 2px #2E8B57">
                                             Find A Community
                                         </a>
                                     </div>
@@ -286,7 +283,7 @@
                                     </table>
                                     @else
                                     <div class="row justify-content-center">
-                                        <h1 class="p-2">No events</h1>
+                                        <p class="lead p-2 font-weight-bold">No events</p>
                                     </div>
                                         
                                     @endif

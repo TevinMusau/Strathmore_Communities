@@ -32,7 +32,7 @@
                     {!!Form::open(['action'=>['EventUserController@store'],'method'=>'POST', 'class'=>'','style'=>'display: inline'])!!}
                             {{Form::hidden('user_id',Auth::user()->id)}}
                             {{Form::hidden('event_id',$event->id)}}
-                            {{Form::submit('Join Event',['class'=>'btn btn-outline-success font-weight-bold', 'style'=>'width:20%; padding: 0.4rem; box-shadow:  2px 2px 2px #B0E0E6'])}}
+                            {{Form::submit('Join Event',['class'=>'btn btn-outline-success font-weight-bold', 'style'=>'width:20%; padding: 0.4rem; box-shadow:  2px 2px 2px #2E8B57'])}}
                     {!!Form::close()!!}
                 </div>
 
@@ -105,7 +105,7 @@
                 </table>
                 @else
                 <div class="text-center p-4">
-                    <h1>There are no student in this event!</h1>
+                    <h3 class="font-weight-bold">There are no student in this event</h3>
                 </div>
                     
                 @endif
